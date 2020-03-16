@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mx.mapper.Article_CommentMapper">
+
+    <!--封装User Article Comment-->
+    <resultMap id="ArticleCommentMap" type="com.mx.pojo.Article_Comment" >
+        <!--封装Comment基本信息-->
+        <id column="aco_id" jdbcType="INTEGER"  property="acoId" />
+        <result column="ac_content" jdbcType="LONGVARCHAR" property="ACcontent" />
+        <result column="creat_time" jdbcType="VARCHAR" property="creatTime" />
+        <result column="a_id" jdbcType="INTEGER" property="aId" />
+
+
+<!--        封装Article基本信息-->
+        <collection property="article" ofType="com.mx.pojo.Article">
+            <id property="a_id" column="aId"/>
+            <result property="title" column="title"/>
+        </collection>
+
+        <!--封装User基本信息-->
+        <collection property="user"  ofType="com.mx.pojo.User">
+            <id column="u_id"  property="uId"/>
+            <result column="u_name"  property="uName"/>
+        </collection>
+    </resultMap>
+    <resultMap id="commentRelative" type="HashMap">
+        <id property="aco_id" column="aco_id"/>
+        <result property="ac_content" column="ac_content"/>
+        <result property="c_id" column="c_id"/>
+        <result property="u_name" column="u_name"/>
+        <result property="create_time" column="create_time"/>
+        <result property="user_path" column="user_path"/>
+        <result property="r_count" column="r_count"/>
+    </resultMap>
+
+    <resultMap id="replyRelative" type="HashMap">
+        <id property="acr_id" column="acr_id"/>
+        <result property="u_id" column="u_id"/>
+        <result property="a_id" column="a_id"/>
+        <result property="aco_id" column="aco_id"/>
+        <result property="to_uid" column="to_uid"/>
+        <result property="acr_content" column="acr_content"/>
+        <result property="reply_time" column="reply_time"/>
+        <result property="uName" column="uName"/>
+        <result property="upath" column="upath"/>
+    </resultMap>
+
+    <insert id="addAC" parameterType="com.mx.pojo.Article_Comment">
+        insert into article_comment(ac_content, u_id, a_id) values (#{ACcontent},#{uId},#{aId})
+    </insert>
+
+<!--    <select id="queryCommentByaId" resultMap="ArticlesMap">-->
+<!--        select-->
+<!--        t1.`content`,t1.`creattime`,t1.`a_id` as aId,t2.`a_id` as aId,t3.`u_name` as uName,-->
+<!--        from inkroom.article_comment as t1,inkroom.article as t2,inkroom.user as t3-->
+<!--        <where>-->
+<!--            <if test="aId != null">-->
+<!--                t1.a_id=t2.a_id-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+<!--    <select id="queryCommentByuId" resultMap="ArticlesMap">-->
+<!--        select-->
+<!--        t1.`content`,t1.`creattime`,t1.`a_id` as aId,t2.`a_id` as aId,t3.`u_name` as uName,-->
+<!--        from inkroom.article_comment as t1,inkroom.article as t2,inkroom.user as t3-->
+<!--        <where>-->
+<!--                t1.u_id=t2.u_id-->
+<!--        </where>-->
+<!--    </select>-->
+
+
+<!--    <insert id="add" parameterType="com.mx.pojo.Article_Comment">-->
+<!--        insert into article_comment-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="content != null content != ''">-->
+<!--                content,-->
+<!--            </if>-->
+<!--        </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+
+<!--            <if test="content != null">-->
+<!--                #{content},-->
+<!--            </if>-->
+
+<!--    </trim>-->
+<!--    </insert>-->
+
+<!--    <delete id="delete">-->
+<!--        delete from article_comment where a_id = #{aId}-->
+<!--    </delete>-->
+
+<!--查询某个人发布的评论及评论所属文章-->
+<!--    <select id="myComment" resultMap="ArticleCommentMap" parameterType="Integer">
+        SELECT
+        article_comment.*,
+        article.title
+        FROM
+        article,
+        article_comment
+        WHERE
+        article_comment.u_id = #{uId}
+        AND article.a_id = article_comment.a_id
+    </select>-->
+
+    <!-- 查询指定文章信息及所有评论及评论所属评论者信息-->
+    <select id="queryCByA_id" parameterType="Integer" resultMap="ArticleCommentMap">
+    SELECT
+	article.a_id,article.title, article_comment.aco_id,article_comment.ac_content,
+	article_comment.u_id,
+	`user`.u_name,
+	article_comment.create_time
+    FROM
+	(
+		article
+		LEFT JOIN article_comment ON article_comment.a_id = article.a_id
+	)
+    LEFT JOIN `user` ON `user`.u_id = article_comment.u_id
+    WHERE
+	article.a_id =  #{aId}
+    </select>
+    <!-- 查询指定文章所有评论及评论所属评论者信息及其头像地址-->
+<!--    <select id="cmtAndUser" resultMap="commentRelative" parameterType="Integer">
+    SELECT
+	article_comment.aco_id,
+	article_comment.ac_content,
+	article_comment.u_id AS c_id,
+	`user`.u_name,
+	article_comment.create_time,
+	user_pic.user_path
+    FROM
+	article,
+	article_comment,
+	`user`,
+	user_pic
+    WHERE
+	article_comment.a_id = article.a_id
+    AND `user`.u_id = article_comment.u_id
+    AND article_comment.u_id=user_pic.u_id
+    AND article.a_id = #{aId}
+    </select>-->
+    <!--评论的回复，回复的回复，回复人信息，被回复人信息-->
+    <select id="reply" resultMap="replyRelative" parameterType="Integer">
+    SELECT
+	t2.acr_id,
+	t2.u_id,
+	t2.uName,
+	t2.a_id,
+	t2.aco_id,
+	t2.acr_content,
+	t2.upath,
+	t2.reply_time,
+	t2.to_uid,
+	t1.r_uName,
+	t1.r_upath
+    FROM
+	(
+		SELECT
+			ac_reply.acr_id,
+			`user`.u_name AS r_uName,
+			user_pic.user_path AS r_upath
+		FROM
+			(
+				ac_reply
+				LEFT JOIN `user` ON `user`.u_id = ac_reply.to_uid
+			)
+		LEFT JOIN user_pic ON `user`.u_id = user_pic.u_id
+		WHERE
+			ac_reply.a_id = #{0}
+		AND ac_reply.aco_id = #{1}
+	) t1,
+	(
+		SELECT
+			ac_reply.*, `user`.u_name AS uName,
+			user_pic.user_path AS upath
+		FROM
+			ac_reply,
+			`user`,
+			user_pic
+		WHERE
+			`user`.u_id = ac_reply.u_id
+            AND `user`.u_id = user_pic.u_id
+            AND ac_reply.a_id = #{0}
+            AND ac_reply.aco_id = #{1}
+	) t2
+    WHERE
+	t1.acr_id = t2.acr_id order by reply_time
+    </select>
+
+    <!--每条评论回复数-->
+
+    <!--添加回复-->
+    <insert id="addReply" parameterType="Map">
+        INSERT into ac_reply(u_id,a_id,aco_id,to_uid,acr_content) VALUES(#{u_id},#{a_id},#{aco_id},#{to_uid},#{acr_content})
+    </insert>
+    <!--删除文章评论-->
+    <delete id="delAC" parameterType="Integer">
+        delete from article_comment where aco_id=#{0}
+    </delete>
+    <!--删除回复-->
+    <delete id="delReply" parameterType="Integer">
+        delete  from ac_reply where acr_id=#{0}
+    </delete>
+
+    <!--加上指定文章下每条评论的回复数-->
+   <select id="cmtAndUser" resultMap="commentRelative" parameterType="Integer">
+    SELECT
+	t1.*, t2.r_count
+    FROM
+	(
+		SELECT
+			article_comment.aco_id,
+			article_comment.ac_content,
+			article_comment.u_id AS c_id,
+			`user`.u_name,
+			article_comment.create_time,
+			user_pic.user_path
+		FROM
+			article,
+			article_comment,
+			`user`,
+			user_pic
+		WHERE
+			article_comment.a_id = article.a_id
+		AND `user`.u_id = article.u_id
+		AND article_comment.u_id = user_pic.u_id
+		AND article.a_id = #{aId}
+	) t1
+    LEFT JOIN (
+        SELECT
+            ac_reply.aco_id,
+            count(*) AS r_count
+        FROM
+            ac_reply
+        WHERE
+            aco_id IN (
+                SELECT
+                    aco_id
+                FROM
+                    article_comment
+                WHERE
+                    a_id = #{aId}
+            )
+        GROUP BY
+            aco_id
+    ) t2 ON t1.aco_id = t2.aco_id order by create_time
+   </select>
+
+
+    <select id="myComment" parameterType="Integer" resultMap="commentRelative">
+    SELECT
+        article.a_id,
+        article.title,
+        article_comment.aco_id,
+        article_comment.ac_content,
+        article_comment.u_id,
+        `user`.u_name,
+        article_comment.create_time
+    FROM
+        article,
+        `user`,
+        article_comment
+    WHERE
+        article_comment.u_id = #{0}
+    AND article_comment.a_id = article.a_id
+    AND `user`.u_id = article_comment.u_id
+    </select>
+
+    <select id="myReply" parameterType="Integer" resultMap="replyRelative">
+        SELECT
+            t1.*, t2.u_name,
+            t3.user_path
+        FROM
+            ac_reply t1,
+            `user` t2,
+            user_pic t3
+        WHERE
+            to_uid = #{0}
+        AND t1.u_id = t2.u_id
+        AND t1.u_id = t3.u_id
+    </select>
+</mapper>

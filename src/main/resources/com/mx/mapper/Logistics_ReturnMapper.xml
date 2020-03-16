@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mx.mapper.Logistics_ReturnMapper">
+  <resultMap id="Logistics_ReturnMap" type="com.mx.pojo.Logistics_Return">
+    <result column="lr_id" jdbcType="INTEGER" property="lrId" />
+    <result column="o_id" jdbcType="INTEGER" property="oId" />
+    <result column="l_id" jdbcType="INTEGER" property="lId" />
+    <result column="lr_num" jdbcType="VARCHAR" property="waybillNum" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+  </resultMap>
+
+  <insert id="createLog" parameterType="com.mx.pojo.Logistics_Return">
+    insert into logistics_return
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oId != null">
+        o_id,
+      </if>
+      <if test="lId != null">
+        l_id,
+      </if>
+        lr_num,
+        company
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oId != null">
+        #{oId},
+      </if>
+      <if test="lId != null">
+        #{lId},
+      </if>
+        #{waybillNum},
+      <if test="company != null">
+        #{company},
+      </if>
+    </trim>
+  </insert>
+  <select id="repeatApply" resultMap="Logistics_ReturnMap">
+  select o_id from logistics_return where o_id=#{oid}
+</select>
+</mapper>

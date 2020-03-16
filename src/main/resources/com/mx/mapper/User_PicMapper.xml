@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mx.mapper.User_PicMapper">
+  <resultMap id="BaseResultMap" type="com.mx.pojo.User_Pic">
+    <result column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="user_path" jdbcType="VARCHAR" property="userPath" />
+  </resultMap>
+  <insert id="insert" parameterType="com.mx.pojo.User_Pic">
+    insert into user_pic (u_id, user_path)
+    values (#{uId,jdbcType=INTEGER}, #{userPath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mx.pojo.User_Pic">
+    insert into user_pic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="userPath != null">
+        user_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uId != null">
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="userPath != null">
+        #{userPath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="queryUserPic" parameterType="integer" resultType="com.mx.pojo.User_Pic">
+    select *from user_pic where u_id=#{uId}
+  </select>
+  <delete id="deleteUserPic" parameterType="integer">
+    delete from user_pic where u_id=#{uId}
+  </delete>
+  <update id="updateUserPic" parameterType="com.mx.pojo.User_Pic">
+    update  user_pic set
+    user_path=#{userPath}
+    where u_id=#{uId}
+  </update>
+</mapper>

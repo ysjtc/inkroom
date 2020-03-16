@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mx.mapper.ItemMapper">
+  <!--封装Item  Item_pic Category-->
+<resultMap id="ItemMap" type="com.mx.pojo.Item">
+  <id column="item_id" jdbcType="INTEGER" property="itemId" />
+  <result column="name" jdbcType="VARCHAR" property="name" />
+  <!--<result column="c_id" property="cId"/>-->
+  <result column="price" property="price" />
+  <result column="count" jdbcType="INTEGER" property="count" />
+  <result column="author" jdbcType="VARCHAR" property="author" />
+  <result column="ISBN" jdbcType="VARCHAR" property="isbn" />
+  <result column="old_level" jdbcType="VARCHAR" property="oldLevel" />
+  <result column="compare" jdbcType="REAL" property="compare" />
+  <result column="describe" jdbcType="VARCHAR" property="describe" />
+  <result column="publish_time" jdbcType="VARCHAR" property="publishTime" />
+  <result column="publish" jdbcType="VARCHAR" property="publish" />
+  <result column="place" jdbcType="VARCHAR" property="place" />
+  <result column="label" jdbcType="BIT" property="label" />
+  <association property="CateId" column="c_id" javaType="com.mx.pojo.Category">
+      <id property="cId" column="c_id"/>
+      <result column="catename" property="CateName"/>
+  </association>
+  <association property="item_pic" javaType="com.mx.pojo.Item_Pic">
+    <id column="Item_id" property="itemId"/>
+    <result column="pic_path" property="picPath"/>
+  </association>
+</resultMap>
+
+
+  <insert id="addItems" parameterType="com.mx.pojo.Item">
+    insert into item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="CateId.cId != null">
+        c_id,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="isbn != null">
+        ISBN,
+      </if>
+      <if test="oldLevel != null">
+        old_level,
+      </if>
+      <if test="compare != null">
+        compare,
+      </if>
+      <if test="describe != null">
+        `describe`,
+      </if>
+      <if test="publishTime != null">
+        publish_time,
+      </if>
+      <if test="publish != null">
+        publish,
+      </if>
+      <if test="place != null">
+        place,
+      </if>
+      <if test="label != null">
+        label,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name},
+      </if>
+      <if test="CateId != null">
+        #{CateId.cId},
+      </if>
+      <if test="price != null">
+        #{price},
+      </if>
+      <if test="count != null">
+        #{count},
+      </if>
+      <if test="author != null">
+        #{author},
+      </if>
+      <if test="isbn != null">
+        #{isbn},
+      </if>
+      <if test="oldLevel != null">
+        #{oldLevel},
+      </if>
+      <if test="compare != null">
+        #{compare},
+      </if>
+      <if test="describe != null">
+        #{describe},
+      </if>
+      <if test="publishTime != null">
+        #{publishTime},
+      </if>
+      <if test="publish != null">
+        #{publish},
+      </if>
+      <if test="place != null">
+        #{place},
+      </if>
+      <if test="label != null">
+        #{label},
+      </if>
+    </trim>
+    <!-- 获取到item最后一次插入的数据 -->
+    <selectKey keyProperty="itemId" resultType="Integer" order="AFTER">
+      select LAST_INSERT_ID()
+    </selectKey>
+
+  </insert>
+  <select id="queryAll" resultMap="ItemMap">
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id`
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsCount" resultType="Integer">
+    select count(*)from item
+  </select>
+  <select id="queryItemsByName" resultMap="ItemMap">
+  <bind name="_name" value="'%'+name+'%'"/>
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+       t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id` and
+      <if test="_name != null">
+        t1.name COLLATE utf8_general_ci LIKE #{_name}
+      </if>
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByNameCount" resultType="Integer">
+    <bind name="_name" value="'%'+name+'%'"/>
+    SELECT COUNT(*) FROM item WHERE NAME  LIKE #{_name}
+  </select>
+  <select id="queryItemsById"  resultMap="ItemMap">
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`
+    from inkroom.item as t1,inkroom.category as t3
+    <where>
+      <if test="itemId != null">
+        item_id = #{itemId}
+      </if>
+      and t1.`c_id`=t3.`c_id`
+    </where>
+  </select>
+  <select id="queryItemsByISBN"  resultMap="ItemMap">
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      <if test="isbn != null">
+        ISBN = #{isbn}
+      </if>
+      and  t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id`
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByISBNCount" resultType="Integer">
+     SELECT COUNT(*) FROM item WHERE ISBN=#{isbn}
+  </select>
+  <select id="queryItemsByPrice" resultMap="ItemMap">
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      price between #{lowPrice} and #{highPrice} and  t1.c_id=t3.c_id AND t1.item_id=t2.item_id
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByPriceCount" resultType="Integer">
+     SELECT COUNT(*) FROM item
+    <where>
+      price between #{lowPrice} and #{highPrice}
+    </where>
+  </select>
+  <select id="queryItemsByItemCate" resultMap="ItemMap">
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      t1.c_id=t3.c_id AND t1.item_id=t2.item_id AND t1.c_id=#{itemCate}
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByItemCateCount" resultType="Integer">
+     SELECT COUNT(*) FROM item
+    <where>
+     c_id=#{itemCate}
+    </where>
+  </select>
+  <delete id="deleteItem" parameterType="com.mx.pojo.Item">
+      delete from item
+      <where>
+        <trim>
+          <if test="itemId!=null">
+            item_id=#{itemId}
+          </if>
+        </trim>
+      </where>
+  </delete>
+  <update id="updateItemsInfo">
+    update item
+    <set>
+      <if test="name!= null and name!=''">
+        name=#{name},
+      </if>
+      <if test="CateId != null and CateId!=''">
+        c_id=#{CateId},
+      </if>
+      <if test="price != null and price!=''">
+        price=#{price},
+      </if>
+      <if test="count!=null and count!=''">
+        count=#{count},
+      </if>
+      <if test="author != null and author!=''">
+        author=#{author},
+      </if>
+      <if test="isbn != null and isbn!=''">
+      ISBN=#{isbn},
+      </if>
+      <if test="oldLevel != null and oldLevel!=''">
+      old_level=#{oldLevel},
+      </if>
+      <if test="compare  != null and compare!=''">
+        compare=#{compare},
+      </if>
+      <if test="describe != null and describe!='' ">
+        `describe`=#{describe},
+      </if>
+      <if test="publishTime != null and publishTime!=''">
+        publish_time=#{publishTime},
+      </if>
+      <if test="publish != null and publish!=''">
+        publish=#{publish},
+      </if>
+      <if test="place !=null and place!=''">
+        place=#{place},
+      </if>
+      <if test="label !=null and label!=''">
+        label=#{label},
+      </if>
+    </set>
+      where  item_id=#{itemId}
+  </update>
+
+
+  <select id="queryItemsByPriceAndCateAndLabelID" resultMap="ItemMap">
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      price between #{lowPrice} and #{highPrice} AND label=#{labelId} AND t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id`
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByPriceAndCateAndLabelIDCount" resultType="Integer">
+    SELECT COUNT(*) FROM item
+    <where>
+      price between #{lowPrice} and #{highPrice} AND label=#{labelId}
+    </where>
+  </select>
+  <select id="queryItemsByLabelId" resultMap="ItemMap">
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+       label=#{labelId} AND t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id`
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByLabelIdCount" resultType="Integer">
+    SELECT COUNT(*) FROM item
+    <where>
+       label=#{labelId}
+    </where>
+  </select>
+  <select id="queryItemsByCateAndLabelID" resultMap="ItemMap">
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      t1.`c_id`=#{cateId} and label=#{labelId} AND t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id`
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByCateAndLabelIDCount" resultType="Integer">
+    SELECT COUNT(*) FROM item
+    <where>
+       label=#{labelId} and c_id=#{cateId}
+    </where>
+  </select>
+  <select id="queryItemsByNameAndLabelId" resultMap="ItemMap">
+    <bind name="_name" value="'%'+queryData+'%'"/>
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id` and label=#{labelId} and
+      <if test="_name != null">
+        t1.name COLLATE utf8_general_ci LIKE #{_name}
+      </if>
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByNameAndLabelIdCount" resultType="Integer">
+    <bind name="_name" value="'%'+queryData+'%'"/>
+    SELECT COUNT(*) FROM item WHERE NAME  LIKE #{_name} and label=#{labelId}
+  </select>
+  <select id="queryItemsByNameAndCateId" resultMap="ItemMap">
+    <bind name="_name" value="'%'+queryData+'%'"/>
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id` and t1.`c_id`=#{cateId} and
+      <if test="_name != null">
+        t1.name COLLATE utf8_general_ci LIKE #{_name}
+      </if>
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByNameAndCateIdCount" resultType="Integer">
+    <bind name="_name" value="'%'+queryData+'%'"/>
+    SELECT COUNT(*) FROM item WHERE NAME  LIKE #{_name} and t1.`c_id`=#{cateId}
+  </select>
+  <select id="queryItemsByNameAndCateIdAndLabelId" resultMap="ItemMap">
+    <bind name="_name" value="'%'+queryData+'%'"/>
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id` and t1.`c_id`=#{cateId} and label=#{labelId} and
+      <if test="_name != null">
+        t1.name COLLATE utf8_general_ci LIKE #{_name}
+      </if>
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByNameAndCateIdAndLabelIdCount" resultType="Integer">
+    <bind name="_name" value="'%'+queryData+'%'"/>
+    SELECT COUNT(*) FROM item WHERE NAME  LIKE #{_name} and t1.`c_id`=#{cateId} and label=#{labelId}
+  </select>
+  <select id="queryItemsByNameAndPrice" resultMap="ItemMap">
+    <bind name="_name" value="'%'+queryData+'%'"/>
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      price between #{lowPrice} and #{highPrice} and t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id`  and
+      <if test="_name != null">
+        t1.name COLLATE utf8_general_ci LIKE #{_name}
+      </if>
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByNameAndPriceCount" resultType="Integer">
+    <bind name="_name" value="'%'+queryData+'%'"/>
+    SELECT COUNT(*) FROM item WHERE NAME  LIKE #{_name} and price between #{lowPrice} and #{highPrice}
+  </select>
+  <select id="queryItemsByNameAndPriceAndLabelId" resultMap="ItemMap">
+    <bind name="_name" value="'%'+queryData+'%'"/>
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      price between #{lowPrice} and #{highPrice} and t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id`  and label=#{labelId} and
+      <if test="_name != null">
+        t1.name COLLATE utf8_general_ci LIKE #{_name}
+      </if>
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByNameAndPriceAndLabelIdCount" resultType="Integer">
+    <bind name="_name" value="'%'+queryData+'%'"/>
+    SELECT COUNT(*) FROM item WHERE NAME  LIKE #{_name} and price between #{lowPrice} and #{highPrice} and label=#{labelId}
+  </select>
+  <select id="queryItemsByExceptLabelId" resultMap="ItemMap">
+    <bind name="_name" value="'%'+queryData+'%'"/>
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      price between #{lowPrice} and #{highPrice} and t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id`  and t1.`c_id`=#{cateId} and
+      <if test="_name != null">
+        t1.name COLLATE utf8_general_ci LIKE #{_name}
+      </if>
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByExceptLabelIdCount" resultType="Integer">
+    <bind name="_name" value="'%'+queryData+'%'"/>
+    SELECT COUNT(*) FROM item WHERE NAME  LIKE #{_name} and price between #{lowPrice} and #{highPrice} and c_id=#{cateId}
+  </select>
+  <select id="queryItemsByAll" resultMap="ItemMap">
+    <bind name="_name" value="'%'+queryData+'%'"/>
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      price between #{lowPrice} and #{highPrice} and t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id`  and t1.`c_id`=#{cateId} and label=#{labelId} and
+      <if test="_name != null">
+        t1.name COLLATE utf8_general_ci LIKE #{_name}
+      </if>
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByAllCount" resultType="Integer">
+    <bind name="_name" value="'%'+queryData+'%'"/>
+    SELECT COUNT(*) FROM item WHERE NAME  LIKE #{_name} and price between #{lowPrice} and #{highPrice} and c_id=#{cateId} and label=#{labelId}
+  </select>
+  <select id="queryItemsByPriceAndLabelId" resultMap="ItemMap">
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      price between #{lowPrice} and #{highPrice} and t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id` and label=#{labelId} and
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByPriceAndLabelIdCount" resultType="Integer">
+    SELECT COUNT(*) FROM item WHERE  price between #{lowPrice} and #{highPrice}  and label=#{labelId}
+  </select>
+  <select id="queryItemsByPriceAndCateId" resultMap="ItemMap">
+    select
+    t1.`item_id`,t1.`name`,t3.`catename`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`,
+    CASE t1.`label` WHEN   0 THEN '成色好' WHEN 1 THEN '价格低' WHEN 2 THEN '稀有' WHEN 3 THEN '性价比高' WHEN 4 THEN '全新书籍' WHEN 5 THEN '有收藏价值' WHEN 6 THEN '破烂书' END AS `label`,t2.`pic_path`
+    from inkroom.item as t1,inkroom.item_pic as t2,inkroom.category as t3
+    <where>
+      price between #{lowPrice} and #{highPrice} and t1.item_id=t2.item_id AND t1.`c_id`=t3.`c_id`  and t1.`c_id`=#{cateId} and
+      GROUP BY item_id
+      <if test="sort!=null and sortOrder!=null">
+        ORDER BY #{sort} #{sortOrder}
+      </if>
+      limit #{offset},#{pageSize}
+    </where>
+  </select>
+  <select id="queryItemsByPriceAndCateIdCount" resultType="Integer">
+    SELECT COUNT(*) FROM item WHERE  price between #{lowPrice} and #{highPrice} and c_id=#{cateId}
+  </select>
+  <select id="QueryItemsCounts" resultType="Integer">
+    SELECT COUNT(*) FROM item WHERE   c_id=#{cateId}
+  </select>
+  <select id="FrontQueryItemById" resultMap="ItemMap">
+     select
+     t1.`name`,t1.`price`,t1.`count`,t1.`author`,t1.`ISBN`,t1.`old_level`,t1.`compare`,t1.`describe`,t1.`publish_time`,t1.`publish`,t1.`place`
+     from inkroom.item as t1
+     <where>
+         <if test="itemId != null">
+             item_id = #{itemId}
+         </if>
+     </where>
+ </select>
+  <select id="queryItemsPriceByItemId" resultType="Float">
+    select item.price
+    from item
+    where item_id=#{item_id}
+  </select>
+</mapper>

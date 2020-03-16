@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mx.mapper.AddressMapper">
+  <resultMap id="BaseResultMap" type="com.mx.pojo.Address">
+    <result column="add_id" jdbcType="INTEGER" property="addId" />
+    <result column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="addr" jdbcType="VARCHAR" property="addr" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+  </resultMap>
+  <insert id="insert" parameterType="com.mx.pojo.Address">
+    insert into address (add_id, u_id, tel, 
+      postcode, name, addr, 
+      province)
+    values (#{addId,jdbcType=INTEGER}, #{uId,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR}, 
+      #{postcode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mx.pojo.Address">
+    insert into address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addId != null">
+        add_id,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="postcode != null">
+        postcode,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="addr != null">
+        addr,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addId != null">
+        #{addId,jdbcType=INTEGER},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null">
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateAddress" parameterType="com.mx.pojo.Address">
+    update address set
+        name=#{name},
+        tel=#{tel},
+        postcode=#{postcode},
+        province=#{province},
+        addr=#{addr}
+    where u_id=#{uId}
+  </update>
+
+  <select id="selectAddress" parameterType="map" resultType="com.mx.pojo.Address">
+    select * from address
+    where u_id=#{uId}
+    order by #{sort} #{sortOrder} limit #{offset},#{pageSize};
+  </select>
+
+  <select id="getAlladdress" parameterType="integer" resultType="integer">
+    select count(*) from address
+    where u_id=#{uId}
+  </select>
+
+  <delete id="deleteAddress" parameterType="integer">
+    delete from address
+    where add_id=#{addId}
+  </delete>
+
+  <select id="getAddress" resultType="com.mx.pojo.Address">
+    select t1.add_id,t1.name,t1.addr
+    from address as t1
+    <where>
+      <if test="uid!=null and uid!=''">
+        t1.u_id=#{uid}
+      </if>
+    </where>
+  </select>
+  <select id="queryAddressCount" resultType="Integer">
+    select count(*) from address where u_id=#{uid}
+  </select>
+</mapper>

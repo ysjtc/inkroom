@@ -1,0 +1,486 @@
+.pannel-main {
+    padding: 0 10px 8px 10px;
+}
+
+
+/* 顶部个人信息区域 -- start-- */
+
+.personal-info {
+    margin-top: 20px;
+    background-color: #FFFFFF;
+    /*给item来个边框阴影*/
+    box-shadow: 0 15px 30px -25px rgb(0, 0, 0);
+    padding: 40px;
+}
+
+.personal-info .left-info {
+    float: left;
+    margin-left: 10%;
+}
+
+.left-info .personal-pic {
+    float: left;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    margin-bottom: 0px;
+    overflow: hidden;
+}
+
+.left-info .personal-pic img {
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.personal-baseInfo {
+    float: left;
+    margin-left: 25px;
+}
+
+.personal-baseInfo h4 {
+    margin-top: 15px;
+    letter-spacing: 1px;
+}
+
+.personal-baseInfo .personal-id {
+    margin-left: 5px;
+    font-size: 12px;
+    color: #999;
+}
+
+.personal-baseInfo h4 .personal-vip {
+    width: 42px;
+    height: 14px;
+    display: inline-block;
+    position: relative;
+}
+
+.personal-baseInfo h4 .personal-vip img {
+    width: 100%;
+    position: absolute;
+    top: -10px;
+    vertical-align: top;
+}
+
+.personal-baseInfo .greeting {
+    display: block;
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 25px;
+}
+
+.personal-baseInfo .update {
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.personal-info .right-info {
+    float: left;
+    margin-left: 30%;
+}
+
+.personal-otherInfo {
+    margin-top: 20px;
+    float: left;
+}
+
+.personal-otherInfo span {
+    font-size: 13px;
+    display: block;
+    margin: 5px;
+    color: #666;
+}
+
+.personal-otherInfo .safe {
+    display: inline;
+    font-weight: 700;
+    color: rgb(255, 159, 15);
+}
+
+
+/* 顶部个人信息区域 -- end-- */
+
+.main-content {
+    /*position: relative;*/
+    /*margin-bottom:10px;*/
+    /*height:500px;*/
+    /*position:relative;*/
+}
+
+/*购物车的设定*/
+
+.cart-body {
+    width:100%;
+    max-width:97%;
+    margin:0 auto;
+    padding-bottom:3.2rem;
+    box-sizing:border-box
+}
+
+.cart-top{
+    width:100%;
+    border-bottom:1px solid #dcdcdc;
+    margin-top:45px;
+}
+.product {
+    width:100%;
+    padding-bottom:3.05rem
+}
+.product .product-box {
+    width:100%;
+    height:5.8rem;
+    position:relative
+}
+.product-box .product-ckb {
+    width:3rem;
+    height:100%;
+    display:inline-block;
+    float:left;
+    text-align:center;
+    line-height:5.9rem;
+    z-index:1;
+    position:absolute
+}
+.product-ckb em {
+    width:1.1rem;
+    height:1.1rem;
+    border-radius:50%;
+    border:1px solid #B8B4B4;
+    display:inline-block;
+    cursor:pointer;
+    margin-top: 67%;
+}
+.product-ckb .product-xz {
+    background:url(./../images/gouico.png) no-repeat 0 0;
+    background-size:1.1rem;
+    border:0;
+    display:inline-block
+}
+.product-sx {
+    float:left;
+    height:5.8rem;
+    padding:.6rem 0;
+    border-bottom:1px solid #e1e1e1;
+    border-left:1px solid #e1e1e1;
+    border-right:1px solid #e1e1e1;
+    padding-left:3rem;
+    display:inline-block;
+    width:100%;
+    box-sizing:border-box;
+    position:absolute;
+    top:0;
+    left:0
+}
+.product-sx .product-img {
+    width:4.5rem;
+    height:4.5rem;
+    display:inline-block;
+    float:left
+}
+.product-sx .product-name {
+    font-size:1.2rem;
+    color:#000;
+    /*max-width:80%;*/
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    padding-left:13px;
+    /*! font-size: ; */
+}
+.product-sx .product-price {
+    font-size:1rem;
+    color:#e46b7e;
+    margin:12px 0 0 14px;
+    display:inline-block;
+    float:left
+}
+.product-amount {
+    position:absolute;
+    right:17px;
+    margin-right:10px;
+    bottom:15px
+}
+.product_gw {
+    border:1px solid #dbdbdb;
+    width:110px;
+    line-height:25px;
+    overflow:hidden;
+    font-size:.6rem
+}
+.product_gw em {
+    display:block;
+    height:25px;
+    width:35px;
+    float:left;
+    color:#7A7979;
+    border-right:1px solid #dbdbdb;
+    text-align:center;
+    cursor:pointer;
+    font-size: 20px;
+}
+.product_gw .product-num {
+    display:block;
+    float:left;
+    text-align:center;
+    width:38px;
+    font-style:normal;
+    font-size:12px;
+    line-height:25px;
+    border:0;
+    pointer-events:none
+}
+.product_gw em.product-add {
+    float:right;
+    border-right:0;
+    border-left:1px solid #dbdbdb
+}
+.product-del {
+    width:1.15rem;
+    display:inline-block;
+    float:right;
+    /*! margin-top:1px; */
+    margin-right:7px;
+    cursor:pointer
+}
+.product-del img{
+    max-width:100%;
+    vertical-align:middle
+}
+.product-js {
+    width:100%;
+    height:3rem;
+    margin-top:40px;
+    border:1px solid #bfbfbf;
+    line-height:3rem;
+    background:#fff;
+}
+.product-al {
+    display:inline-block;
+    height:3rem;
+    width:7.5rem
+}
+.product-js .product-all {
+    width:3rem;
+    height:100%;
+    display:inline-block;
+    float:left;
+    text-align:center;
+    line-height:3.5rem
+}
+.product-js .product-all em {
+    width:1.1rem;
+    height:1.1rem;
+    border-radius:50%;
+    border:1px solid #B8B4B4;
+    display:inline-block;
+    cursor:pointer;
+    margin-top: 33%;
+}
+.product-js .product-all .product-all-on {
+    background:url(./../images/gouico.png) no-repeat 0 0;
+    background-size:1.1rem;
+    border:0;
+    display:inline-block
+}
+.all-xz {
+    cursor:pointer
+}
+.product-all-qx {
+    color:#797979;
+    float: left;
+    position: absolute;
+}
+.all-sl {
+    color:#797979;
+    display:inline-block;
+    margin-left: 3px;
+    float: left;
+}
+.product-all-sl {
+    /*float: left;*/
+}
+.all-product {
+    text-align:right;
+    float:right
+}
+.all-product .all-product-a {
+    font-size:1.1rem;
+    color:#f41638;
+    font-weight:bolder;
+    display:inline-block;
+    margin-right:10px
+}
+.product-sett {
+    cursor:pointer;
+    float:right;
+    width:6.5rem;
+    height:100%;
+    text-align:center;
+    color:#fff;
+    background:#ed535f
+}
+.product-sett-a {
+    background:#b2b2b2;
+    pointer-events:none
+}
+.kon-cat {
+    display:none
+}
+.catkon {
+    width:100%;
+    height:100%;
+    /*bottom:0;*/
+    padding-bottom:20px;
+    box-sizing:border-box;
+    text-align:center;
+    /*background:red;*/
+    display:table;
+    z-index:100
+}
+.kon-box {
+    text-align:center;
+    display:table-cell;
+    vertical-align:middle;
+    cursor:pointer
+}
+.kon-hz {
+    width:50%;
+    margin:0 auto
+}
+.kon-box .kon-wz {
+    display:block;
+    font-size:1rem;
+    color:#aaa;
+    margin:20px 0
+}
+.kon-box .kon-lj {
+    text-decoration:none;
+    display:inline-block;
+    width:100%;
+    height:2rem;
+    line-height:2rem;
+    background:#383838;
+    color:#fff;
+    margin-top:10px
+}
+
+
+
+/* 用户修改信息模态框开始 */
+
+#updatePersonalInfo {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 40px;
+}
+
+#updateInfo .modal-header,
+#updateInfo .modal-footer {
+    border: none;
+}
+
+#updateInfo .modal-body .info-data {
+    width: 60%;
+    margin: 0 auto;
+}
+
+#updateInfo .modal-body .info-data li {
+    margin-top: 15px;
+}
+
+#updateInfo .modal-body .info-data li label {
+    margin-right: 40px;
+}
+
+#updateInfo .modal-body .info-data li:nth-child(1) {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
+
+#updateInfo .modal-body .info-data li .avatar {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    display: inline-block;
+    border-radius: 50%;
+    position: relative;
+}
+
+#updateInfo .modal-body .info-data li .avatar::before {
+    content: "";
+    width: 110%;
+    height: 110%;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#updateInfo .modal-body .info-data li .avatar:hover a {
+    opacity: 1;
+}
+
+#updateInfo .modal-body .info-data li .avatar:hover::before {
+    border: 1px solid #337ab7;
+}
+
+#updateInfo .modal-body .info-data li .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+#updateInfo .modal-body .info-data li .avatar a {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    font-size: 16px;
+    text-decoration: none;
+    line-height: 80px;
+    letter-spacing: 5px;
+    text-align: center;
+    color: rgba(255, 255, 255, .8);
+    background-color: rgba(0, 0, 0, .5);
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+#updateInfo .modal-body .info-data li input[type="radio"] {
+    margin: 0 5px 0 10px;
+}
+
+#updateInfo .modal-body .info-data li .form-control {
+    display: inline-block;
+    width: 60%;
+}
+
+#updateInfo .modal-footer {
+    padding: 15px 0 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+/* 用户修改信息模态框结束 */
+
+/*一个main-content的外包装*/
+.main-content-wrapper{
+    margin:20px;
+}
+
+/*修正表格的高度问题*/
+.fixed-table-body{
+    height:auto !important;
+}

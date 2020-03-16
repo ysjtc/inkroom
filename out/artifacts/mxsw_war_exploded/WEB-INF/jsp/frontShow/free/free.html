@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>导航栏demo</title>
+    <!-- 引入 Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="./../../../../static/css/bootstrap.min.css">
+    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+    <script src="./../../../../static/js/jquery-3.3.1.js"></script>
+    <!-- 包括所有已编译的插件 -->
+    <script src="./../../../../static/js/bootstrap.min.js"></script>
+    <!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+    <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
+    <!--[if lt IE 9]>
+	    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+    <link rel="stylesheet" type="text/css" href="./../../../../static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="./../../../../static/css/nav.css">
+    <link rel="stylesheet" type="text/css" href="./../../../../static/css/free.css">
+    <script src="./../../../../static/js/nav.js"></script>
+
+</head>
+
+<body>
+    <!-- 外层包装开始 -->
+    <div class="wrapper">
+        <!--左侧导航栏开始-->
+        <div class="left-nav hidden-xs">
+            <!-- 上部导航模块 -->
+            <div class="nav-modul">
+                <div class="nav-logo shake" data-toggle="tooltip" data-placement="right" title="首页">
+                    <a href="./../../../../navigation/nav.html"></a>
+                </div>
+                <div class="nav-item shake" data-toggle="tooltip" data-placement="right" title="书展区">
+                    <a href="login.html">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </a>
+                </div>
+                <div class="nav-item shake" data-toggle="tooltip" data-placement="right" title="拍卖场">
+                    <a href="login.html">
+                        <span class="glyphicon glyphicon-fire"></span>
+                    </a>
+                </div>
+                <div class="nav-item shake" data-toggle="tooltip" data-placement="right" title="书友圈">
+                    <a href="login.html">
+                        <span class="glyphicon glyphicon-globe"></span>
+                    </a>
+                </div>
+                <div class="nav-item shake" data-toggle="tooltip" data-placement="right" title="免费书">
+                    <a href="login.html">
+                        <span class="glyphicon glyphicon-heart"></span>
+                    </a>
+                </div>
+            </div>
+            <!-- 个人中心导航模块 -->
+            <div class="nav-personal">
+                <div class="nav-item shake" data-toggle="tooltip" data-placement="right" title="个人">
+                    <a href="./../../../../personal/login.html">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--左侧导航栏结束-->
+
+        <!--响应式顶部导航栏开始-->
+        <nav class="navbar navbar-default navbar-fixed-top visible-xs top-nav" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#show-navbar">
+						<span class="sr-only">切换导航</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+                    <a class="navbar-brand" href="#">墨香书屋</a>
+                </div>
+                <div class="collapse navbar-collapse" id="show-navbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">书展</a></li>
+                        <li><a href="#">拍卖</a></li>
+                        <li><a href="#">书友圈</a></li>
+                        <li><a href="#">免费书</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								个人中心<b class="caret"></b>
+							</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">登陆</a></li>
+                                <li><a href="#">登出</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--响应式顶部导航栏结束-->
+
+        <!--右侧的显示内容开始-->
+        <div class="right-content">
+            <div class="container-fluid">
+                <!-- 横幅开始 -->
+                <div class="free-banner row">
+                    <h1 class="title text-center">免费书籍</h1>
+                    <p class="text-center">韵味好书，等待知音。</p>
+                </div>
+                <!-- 横幅结束 -->
+                <!-- 免费书展示区开始 -->
+                <div class="row">
+                    <!-- 免费书展示区开始 -->
+                    <div class="col-md-offset-3 col-md-6"></div>
+                    <!-- 免费书展示区结束 -->
+                    <!-- 侧边推荐、新闻 开始 -->
+                    <div class="col-md-3"></div>
+                    <!-- 侧边推荐、新闻 结束 -->
+                </div>
+                <!-- 免费书展示区结束 -->
+            </div>
+        </div>
+        <!--右侧的显示内容结束-->
+    </div>
+    <!-- 外层包装结束 -->
+</body>
+
+</html>

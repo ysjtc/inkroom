@@ -1,0 +1,31 @@
+/* 轮播图信息介绍开始 */
+
+.carousel-caption h2 {
+    text-shadow: 5px 4px 6px #000;
+    margin-top: 0
+}
+
+.carousel-caption p {
+    text-shadow: 5px 4px 6px #000;
+    color: #DDDDDD;
+}
+
+.carousel-caption {
+    text-align: left;
+    top: 20vh;
+    width: 250px;
+    height: 200px;
+}
+
+
+/* 解决图片品平铺问题 */
+
+.carousel-inner .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+
+
+/* 轮播图信息介绍结束 */

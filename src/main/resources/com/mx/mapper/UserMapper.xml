@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mx.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.mx.pojo.User">
+    <id column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="u_name" jdbcType="VARCHAR" property="uName" />
+      <result column="sex" jdbcType="VARCHAR" property="sex"/>
+      <result column="tel" jdbcType="VARCHAR" property="tel"/>
+  </resultMap>
+  <insert id="insert" parameterType="com.mx.pojo.User">
+    insert into user (u_id, name, password, u_name,email)
+    values (#{uId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{uname,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mx.pojo.User" useGeneratedKeys="true" keyProperty="u_id">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+     <!-- <if test="uId != null">
+        u_id,
+      </if>-->
+      <if test="name != null">
+        name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="uName != null">
+        u_name,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="sex!=null">
+        sex,
+      </if>
+        <if test="tel!=null">
+            tel
+        </if>
+    </trim>
+
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <!--<if test="uId != null">
+        #{uId,jdbcType=INTEGER},
+      </if>-->
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null">
+        #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR}
+      </if>
+        <if test="sex != null">
+           #{sex,jdbcType=VARCHAR}
+        </if>
+        <if test="tel != null">
+            #{tel,jdbcType=VARCHAR}
+        </if>
+    </trim>
+  </insert>
+
+  <!--获取用户名最大值-->
+    <select id="queryMaxName" resultType="Integer">
+        select max(name) from user
+    </select>
+  <!--通过用户名来查询用户信息-->
+  <select id="queryUserByname" parameterType="String" resultType="com.mx.pojo.User">
+    select * from user where   name=#{name}
+  </select>
+
+  <!--查询所有用户信息-->
+  <select id="queryUser" resultType="com.mx.pojo.User">
+    select * from user
+  </select>
+
+  <!--通过用户名来删除用户信息-->
+  <delete id="deleteUserByname" parameterType="String" >
+    delete from user where name=#{name}
+  </delete>
+
+  <!--通过用户名来修改用户信息-->
+  <update id="updateUserByname" parameterType="com.mx.pojo.User">
+    update user
+    <set>
+        <if test="uName!=null and uName!=''">u_name=#{uName},</if>
+        <if test="sex!=null and sex!=''">sex=#{sex},</if>
+        <if test="tel!=null and tel!=''">tel=#{tel},</if>
+        <if test="email!=null and email!=''">email=#{email}</if>
+    </set>
+    where name=#{name}
+  </update>
+
+  <select id="queryPageUsers" parameterType="map"  resultType="com.mx.pojo.User">
+    select * from user
+      <where>
+          <if test="name!=null">
+              name like CONCAT(CONCAT('%', #{name}), '%')
+          </if>
+          <if test="uName!=null">
+             and u_name like CONCAT(CONCAT('%', #{uName}), '%')
+          </if>
+      </where>
+    order by #{sort} #{sortOrder} limit #{offset},#{pageSize};
+  </select>
+
+  <select id="getAlluserNum"  parameterType="map" resultType="integer">
+    select count(*) from user
+      <where>
+          <if test="name!=null">
+               name like CONCAT(CONCAT('%', #{name}), '%')
+          </if>
+          <if test="uName!=null">
+              and u_name like CONCAT(CONCAT('%', #{uName}), '%')
+          </if>
+      </where>
+  </select>
+
+</mapper>

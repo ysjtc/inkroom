@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mx.mapper.VipMapper">
+  <resultMap id="BaseResultMap" type="com.mx.pojo.Vip">
+    <result column="vip_id" jdbcType="INTEGER" property="vipId" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+  </resultMap>
+  <insert id="insert" parameterType="com.mx.pojo.Vip">
+    insert into vip (vip_id, score)
+    values (#{vipId,jdbcType=INTEGER}, #{score,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mx.pojo.Vip">
+    insert into vip
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vipId != null">
+        vip_id,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vipId != null">
+        #{vipId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="queryScore" parameterType="integer" resultType="com.mx.pojo.Vip">
+    select *from vip where vip_id=#{id}
+  </select>
+
+  <select id="queryAllvip" resultType="com.mx.pojo.Vip">
+    select *from vip
+  </select>
+
+</mapper>

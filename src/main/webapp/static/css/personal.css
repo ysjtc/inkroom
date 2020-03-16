@@ -1,0 +1,84 @@
+/* 个人中心包裹层开始 */
+
+.personal-wrap {
+    min-height: 100%;
+    background-image: url(../images/personal_bg.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    color: #fff;
+    overflow: hidden;
+    /*BFC*/
+}
+
+
+/* 遮罩层 */
+
+.personal-wrap::before {
+    content: '';
+    min-height: 100%;
+    display: block;
+    left: 0;
+    right: 0;
+    position: absolute;
+    background-color: rgba(0, 0, 0, .45);
+}
+
+
+/* 个人中心包裹层结束 */
+
+
+/* 表单主体 */
+
+.personal-main {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.personal-form-title {
+    margin-bottom: 100px;
+}
+
+.personal-form-title h1 {
+    font-size: 50px;
+    line-height: 100px;
+}
+
+.personal-form-title h1::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 36px;
+    bottom: -20%;
+    background-image: url(../images/login_border.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+}
+
+
+/* 登陆部分 */
+
+.login-form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.personal-btn {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.personal-btn button {
+    width: 40%;
+}
+
+
+/* 注册部分 */
+
+.personal-join {
+    color: #000;
+}

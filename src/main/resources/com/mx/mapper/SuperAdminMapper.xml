@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mx.mapper.SuperAdminMapper">
+  <resultMap id="SuperAdminMap" type="com.mx.pojo.SuperAdmin">
+    <result column="super_id" jdbcType="INTEGER" property="superId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  <select id="queryAdminById"  resultType="com.mx.pojo.SuperAdmin">
+    select * from superadmin where super_id=#{super_id}
+  </select>
+  <select id="queryAdminByName" resultType="com.mx.pojo.SuperAdmin">
+    select * from superadmin
+    <where>
+      <trim>
+          <if test="name != null">
+            and  name=#{name}
+          </if>
+
+      </trim>
+    </where>
+
+  </select>
+  <select id="queryAdminCount" resultType="java.lang.Integer">
+    select count(*) from superadmin
+  </select>
+  <insert id="addSuperAdmin" parameterType="com.mx.pojo.SuperAdmin">
+    insert into superadmin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name},
+      </if>
+      <if test="password != null">
+        #{password},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>
