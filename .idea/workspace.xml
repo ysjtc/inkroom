@@ -7,21 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="109b61a1-da8e-45aa-a791-44faf81164cf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/css/plugins/daterangepicker.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/js/plugins/daterangepicker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/js/plugins/daterangepicker.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/js/plugins/moment-with-locales.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inkroom.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/00a1d9d0-9363-4593-b0a0-2e14afec1fe9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/00a1d9d0-9363-4593-b0a0-2e14afec1fe9.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/mxsw_war_exploded/WEB-INF/classes/com/mx/controller/backMange/ArticleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/mxsw_war_exploded/WEB-INF/classes/com/mx/controller/backMange/ArticleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/mxsw_war_exploded/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/mxsw_war_exploded/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/mxsw_war_exploded/static/js/userMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/mxsw_war_exploded/static/js/userMain.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/mxsw_war_exploded/static/upload/userPic/100003.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/mxsw_war_exploded/static/upload/userPic/100003.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/backMange/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/backMange/ArticleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/userMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/userMain.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/mx/controller/backMange/ArticleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mx/controller/backMange/ArticleController.class" afterDir="false" />
     </list>
-    <list id="7f46ef6f-0b1f-4ec4-af1e-1ad241f2594e" name="Revert &quot;完善曹淦的各个按钮&quot;" comment="Revert &quot;完善曹淦的各个按钮&quot;&#10;&#10;This reverts commit 7f6f803b" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +72,11 @@
         <option value="mxsw2019" />
         <option value="mx" />
       </list>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -141,10 +138,10 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="project.structure.side.proportion" value="0.51449275" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -359,6 +356,9 @@
       <workItem from="1584254301161" duration="529000" />
       <workItem from="1584323391862" duration="795000" />
       <workItem from="1584326485744" duration="2910000" />
+      <workItem from="1584331460208" duration="8711000" />
+      <workItem from="1584342801196" duration="889000" />
+      <workItem from="1584343961851" duration="949000" />
     </task>
     <task id="LOCAL-00001" summary="修改后，用这个">
       <created>1561711718753</created>

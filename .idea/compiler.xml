@@ -6,8 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mxsw" />
+        <module name="inkroom" />
         <module name="mxsw2" />
+        <module name="mxsw" />
       </profile>
     </annotationProcessing>
   </component>
