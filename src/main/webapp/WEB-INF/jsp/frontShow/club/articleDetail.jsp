@@ -25,7 +25,6 @@
     <%--引入club页面资源--%>
     <link rel="stylesheet" type="text/css" href="static/css/articleDetail.css">
 
-
 </head>
 
 <body>
@@ -42,7 +41,7 @@
                         <div class="title-img">
                                 <h3 align="center">${articleDetail.title}</h3>
                                 <pre>${articleDetail.content}</pre><br/>
-                                <span>文章发布时间：${articleDetail.publishTime}</span>
+                                <span>文章发布时间：${articleDetail.publishTime},${articleDetail.user.uName}</span>
                                 <p>喜欢这篇文章？点个赞吧——> <input type="button" value="点赞" id="addAP"/> 点赞：<span id="praiseCount"> ${article_praise}</span></p>点击数${articleDetail.pageView}
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Eros
-  Date: 2019/7/15
+  User: ysjba
+  Date: 2020/4/15
   Time: 16:21
   To change this template use File | Settings | File Templates.
 --%>
@@ -60,16 +60,17 @@
             <li>查看商品信息</li>
             <li>添加商品</li>
             <li>删除商品</li>
+            <li>管理商品评论</li>
         </ul>
     </div>
     <!-- 社区管理 -->
     <div class="section">
         <div class="section-title">
             <span class="club-icon icon"></span>
-            <h4>社区管理</h4>
+            <h4>论坛管理</h4>
         </div>
         <ul>
-            <li>查看商品信息</li>
+            <li><a href="Forward/showArticles">帖子管理</a></li>
             <li>添加商品</li>
             <li>删除商品</li>
         </ul>

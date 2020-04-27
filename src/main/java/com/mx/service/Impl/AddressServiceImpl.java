@@ -63,7 +63,7 @@ public class AddressServiceImpl implements AddressService {
         try {
             int count=addressMapper.queryAddressCount(uid);
             if (count==0){
-                return "{\"result\":false}";
+                return "{\"result\":false,\"isLogin\":true}";
             }
             List<Address> addressList=addressMapper.getAddress(uid);
             System.out.println(addressList);

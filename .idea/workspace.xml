@@ -2,13 +2,35 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="mxsw:war exploded" />
+      <artifact name="inkroom:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="109b61a1-da8e-45aa-a791-44faf81164cf" name="Default Changelist" comment="创建superadmin分支，在新分支下搭建后台管理所需包结构">
+    <list default="true" id="109b61a1-da8e-45aa-a791-44faf81164cf" name="Default Changelist" comment="修复了商品图片显示的bug">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mx/utils/Listener/OnlineUserListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/clubManage/articleManage.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/css/backManage/showArticles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/mxsw_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/inkroom_war_exploded.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/mxsw_war_exploded/static/upload/userPic/100007.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/mxsw_war_exploded/static/upload/userPic/100007.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/backMange/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/ArticleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/backMange/Article_CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/Article_CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/backMange/Article_CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/Article_CommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/backMange/BackManageForwardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/backMange/BackManageForwardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/AddressContreller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/AddressContreller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/mapper/ArticleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/mapper/ArticleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/service/ArticleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/service/ArticleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/service/Impl/AddressServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/service/Impl/AddressServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/service/Impl/ArticleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/service/Impl/ArticleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/utils/Encoding/userCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/utils/Encoding/userCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mx/mapper/ArticleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mx/mapper/ArticleMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mx/mapper/Article_CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mx/mapper/Article_CommentMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring/spring-servlet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/navigation/nav.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/navigation/nav.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/storeManage/addItem.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/storeManage/addItem.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/backManage/backNav.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/backManage/backNav.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/frontShow/club/articleDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/frontShow/club/articleDetail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/addAddr.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/addAddr.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,8 +77,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -124,7 +146,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562839951925" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mxsw2" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -137,11 +159,15 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.51449275" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.mx.service" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\idea_projects\mxsw2\src\main\webapp\static\css\plugins" />
+      <recent name="D:\idea_projects\mxsw2\src\main\webapp\static\css" />
+      <recent name="D:\idea_projects\mxsw2\src\main\webapp\WEB-INF\jsp\frontShow\club" />
+      <recent name="D:\Files\mxsw2\src\main\webapp\WEB-INF\jsp" />
+      <recent name="D:\Files\mxsw2\src\main\webapp" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\idea_projects\mxsw2\src\main\webapp\static\js\plugins" />
@@ -150,12 +176,8 @@
       <recent name="D:\Files\mxsw2\src\main\java\com\mx\service" />
       <recent name="D:\Files\mxsw2\src\main\java\com\mx\service\Impl" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\idea_projects\mxsw2\src\main\webapp\static\css\plugins" />
-      <recent name="D:\idea_projects\mxsw2\src\main\webapp\static\css" />
-      <recent name="D:\idea_projects\mxsw2\src\main\webapp\WEB-INF\jsp\frontShow\club" />
-      <recent name="D:\Files\mxsw2\src\main\webapp\WEB-INF\jsp" />
-      <recent name="D:\Files\mxsw2\src\main\webapp" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.mx.service" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -185,12 +207,12 @@
       </method>
     </configuration>
     <configuration name="Tomcat 9.0.0.M15" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.0.M15" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/mxsw_war_exploded/" />
-      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/inkroom_war_exploded/" />
+      <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="mxsw:war exploded">
+        <artifact name="inkroom:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/mxsw_war_exploded" />
+            <option name="CONTEXT_PATH" value="/inkroom_war_exploded" />
           </settings>
         </artifact>
       </deployment>
@@ -254,6 +276,7 @@
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
           <artifact name="mxsw:war exploded" />
+          <artifact name="inkroom:war exploded" />
         </option>
       </method>
     </configuration>
@@ -358,6 +381,25 @@
       <workItem from="1584683984972" duration="11000" />
       <workItem from="1584689067873" duration="118000" />
       <workItem from="1584942502499" duration="6930000" />
+      <workItem from="1585295656476" duration="19000" />
+      <workItem from="1585525281207" duration="4061000" />
+      <workItem from="1585540410673" duration="871000" />
+      <workItem from="1585542343963" duration="312000" />
+      <workItem from="1585909174724" duration="3131000" />
+      <workItem from="1586478953947" duration="4311000" />
+      <workItem from="1586486999594" duration="55000" />
+      <workItem from="1586487958513" duration="4141000" />
+      <workItem from="1586751027356" duration="1443000" />
+      <workItem from="1587100573205" duration="1024000" />
+      <workItem from="1587125282974" duration="4392000" />
+      <workItem from="1587285420117" duration="9654000" />
+      <workItem from="1587342605145" duration="6645000" />
+      <workItem from="1587377006190" duration="1331000" />
+      <workItem from="1587390699122" duration="4705000" />
+      <workItem from="1587708146403" duration="6000" />
+      <workItem from="1587726913212" duration="7424000" />
+      <workItem from="1587862382386" duration="41612000" />
+      <workItem from="1587947026243" duration="16467000" />
     </task>
     <task id="LOCAL-00001" summary="修改后，用这个">
       <created>1561711718753</created>
@@ -443,10 +485,10 @@
             <State>
               <option name="FILTERS">
                 <map>
-                  <entry key="user">
+                  <entry key="branch">
                     <value>
                       <list>
-                        <option value="me" />
+                        <option value="HEAD" />
                       </list>
                     </value>
                   </entry>
@@ -465,12 +507,12 @@
             <list>
               <RecentGroup>
                 <option name="FILTER_VALUES">
-                  <option value="origin/master" />
+                  <option value="HEAD" />
                 </option>
               </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
-                  <option value="HEAD" />
+                  <option value="origin/master" />
                 </option>
               </RecentGroup>
               <RecentGroup>

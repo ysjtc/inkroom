@@ -1,4 +1,4 @@
-package com.mx.controller.backMange;
+package com.mx.controller.frontManage;
 
 import com.mx.pojo.Article;
 import com.mx.pojo.Article_Category;
@@ -71,6 +71,7 @@ public class ArticleController {
             //String s=list.getContent();
             //s.replace("\r\n","<br/>").replace(" ","&nbsp;&nbsp;");
             //list.setContent(s);
+            System.out.println(list);
             req.setAttribute("aId",aId);
             req.getRequestDispatcher("/Comment/cmtAndUser").forward(req,res);
         }
@@ -236,14 +237,4 @@ public class ArticleController {
             return "frontShow/club/club";
         }
     }
-
-    @ResponseBody
-    @RequestMapping("/query/myArticles")
-    public List<Map<String,Object>> myArticles(HttpSession session,Integer uId){
-        if (uId==null){
-            uId=Integer.parseInt(session.getAttribute("uId").toString());
-        }
-        return articleService.myArticles(uId);
-    }
-
 }

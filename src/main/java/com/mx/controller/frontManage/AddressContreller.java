@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -35,6 +34,7 @@ public class AddressContreller {
 
 
     /*用户管理下的收货人模块*/
+    @ResponseBody
     @RequestMapping (value="/addAddr")
     public String addAddress(
             @Valid Address address,
@@ -45,22 +45,22 @@ public class AddressContreller {
         try{
             if (UserValidator.checkError(result)) {
                 model.addAttribute("info","请勿非法测试！");
-                return "frontShow/errorPage/error";
+                return "{\"result\":false}";
             }else{
                 int uId=userService.getUserIdByname((String)session.getAttribute("USER_ID"));
                 address.setuId(uId);
                 /*入库前的检验*/
                 if(userCheck.CheckAddaddr(address)){
                     model.addAttribute("info","数据输入格式错误或未输入数据！");
-                    return "frontShow/personal/addAddr";
+                    return "{\"result\":false}";
                 }else {
                     /*入库*/
                     addressService.Addaddress(address);
                 }
-                return "frontShow/personal/addAddr";
+                return "{\"result\":true}";
         }}catch (Exception e){
             e.printStackTrace();
-            return "frontShow/errorPage/error";
+            return "{\"result\":false}";
         }
     }
 
@@ -116,23 +116,21 @@ public class AddressContreller {
         }
 
     }
-
+    @ResponseBody
     @RequestMapping(value="clearAddress")
-    public String ClaerAddress(
-            @RequestParam("addId") int addId
-    ){
+    public String ClaerAddress(Integer addId){
         try{
             /*判断addId是否合法*/
             if(addId>0){
                 addressService.Clearaddress(addId);
-                return "frontShow/errorPage/error";
+                return "{\"result\":true}";
             }else{
-                return "frontShow/personal/addAddr";
+                return "{\"result\":false}";
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            return "frontShow/errorPage/error";
+            return "{\"result\":false}";
         }
     }
 

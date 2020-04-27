@@ -40,4 +40,7 @@ public interface ArticleMapper {
 
     Map<String,Object> statistics(Integer uId);
 
+    //articleManage
+    List<Map<String,Object>> articleManage();
+
 }

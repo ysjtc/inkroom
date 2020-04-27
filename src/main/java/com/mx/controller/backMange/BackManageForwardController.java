@@ -53,5 +53,9 @@ public class BackManageForwardController {
         return "backManage/orderManage/confirmReturn";
     }
 
+    @RequestMapping("/showArticles")
+    public String showArticles(){
+        return "backManage/clubManage/articleManage";
+    }
 
 }

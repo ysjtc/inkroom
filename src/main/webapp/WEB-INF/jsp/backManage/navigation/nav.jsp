@@ -1,7 +1,7 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Eros
-  Date: 2019/7/15
+  User: ysjba
+  Date: 2020/3/15
   Time: 16:44
   To change this template use File | Settings | File Templates.
 --%>
@@ -31,7 +31,7 @@
         <div class="alert alert-success which-one">
         <!--此处应当第一次从服务器获取身份和时间后，再由js动态刷新时间(假时间，减轻服务器压力)-->
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>欢迎管理员/雇员！</strong>当前时间为：北京时间 02:03:11
+        <strong>欢迎管理员/雇员！</strong>当前时间为：北京时间 <span id="date"></span>
         </div>
 
 
@@ -107,6 +107,12 @@
 	
 	<!--直接将此js用jsp处理，可以省却写ajax请求-->
     <script type="text/javascript">
+        $(document).ready(function() {
+            var d=new Date();
+            var t=d.toLocaleString();
+            //alert(t);
+            $("#date").html(t);
+        })
 
 
         //本周内的成交额的chart相关调用

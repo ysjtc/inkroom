@@ -165,19 +165,14 @@ $(document).ready(function() {
                     valign: 'middle',
                     width: '200',
                 },{
-                    field: 'add_id',
-                    title: '地址id',
-                    align: 'center',
-                    valign: 'middle',
-                    visible:false,
-                }, {
+                    field: 'addId',
                     title: "操作",
                     align: 'center',
                     valign: 'middle',
                     width: '70',
                     formatter:function(value, row, index){
 
-                        return "<button class='btn btn-default btn-xs delAddr' add_id='"+row.add_id+"'><span class='glyphicon glyphicon-exclamation-sign'></span>删除</button><br/><button style='margin-top:8px' class='btn btn-default btn-xs editAddr' add_id='"+row.add_id+"'><span class='glyphicon glyphicon-pencil'></span>修改</button>";
+                        return "<button class='btn btn-default btn-xs delAddr' add_id='"+value+"'><span class='glyphicon glyphicon-exclamation-sign'></span>删除</button><br/><button style='margin-top:8px' class='btn btn-default btn-xs editAddr' add_id='"+value+"' data-toggle='modal' data-target='#applyEditModal'><span class='glyphicon glyphicon-pencil'></span>修改</button>";
                     }
                 }
                 ],
@@ -188,23 +183,27 @@ $(document).ready(function() {
     doTable("Address/getAlladdress");
 	
 	//点击删除该地址
-	$(".product").on("click",".delAddr",function(){
-		var data={};
-		data['add_id']=$(this).attr("attr");
+	$("#addrInfoTable").on("click",".delAddr",function(){
+	    //alert($(this).attr("add_id"));
+	    //return false;
+		data=$(this).attr("add_id");
 		$.ajax({
-			url : 'aa/bb',
-			data : postData,
+			url : 'Address/clearAddress',
+			data : {"addId":data},
 			type : 'POST',
 			success : function(data) {
 				var data=JSON.parse(data);
 				if(data['result']){
 					//修改成功后刷新下方表格
 					doTable("Address/getAlladdress");
-					alert("添加成功");
+					alert("删除成功");
 				}else{
 					alert("意外错误，请重试！");
 				}
-			}
+			},
+			error: function () {
+                alert("网络错误")
+            }
 		});
 	});
 	

@@ -39,4 +39,7 @@ public interface ArticleService {
     List<Map<String,Object>> myArticles(Integer uId);
 
     Map<String,Object> statistics(Integer uId);
+
+    //articleManage
+    List<Map<String,Object>> articleManage();
 }

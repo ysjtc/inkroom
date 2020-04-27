@@ -54,6 +54,7 @@
             <mvc:mapping path="/SuperAdmin/**/*"/>
             <mvc:mapping path="/ItemsBackManage/**/*"/>
             <mvc:mapping path="/Forward/**/*"/>
+            <mvc:mapping path="/ArticleBackManage/**/*"/>
             <mvc:exclude-mapping path="/SuperAdmin/ToSuperadmin"/>
             <bean class="com.mx.interCeptors.SuperAdminInterCeptor">
             </bean>

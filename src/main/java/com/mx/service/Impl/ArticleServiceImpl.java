@@ -122,4 +122,9 @@ public class ArticleServiceImpl implements ArticleService {
     public Map<String, Object> statistics(Integer uId) {
         return articleMapper.statistics(uId);
     }
+
+    @Override
+    public List<Map<String, Object>> articleManage() {
+        return articleMapper.articleManage();
+    }
 }

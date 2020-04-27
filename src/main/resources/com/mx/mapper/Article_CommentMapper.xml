@@ -166,8 +166,7 @@
 			)
 		LEFT JOIN user_pic ON `user`.u_id = user_pic.u_id
 		WHERE
-			ac_reply.a_id = #{0}
-		AND ac_reply.aco_id = #{1}
+            ac_reply.aco_id = #{1}
 	) t1,
 	(
 		SELECT
@@ -180,7 +179,6 @@
 		WHERE
 			`user`.u_id = ac_reply.u_id
             AND `user`.u_id = user_pic.u_id
-            AND ac_reply.a_id = #{0}
             AND ac_reply.aco_id = #{1}
 	) t2
     WHERE

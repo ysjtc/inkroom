@@ -61,7 +61,7 @@ public class userCheck {
             return true;
 
         /*检验电话号码*/
-        String regexNumber = "^1[3|4|5|8][0-9]\\d{8}$";
+        String regexNumber = "^1[3456789]\\d{9}$";
         if(address.getTel().length()!=11||!address.getTel().matches(regexNumber)){
             return true;
         }

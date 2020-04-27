@@ -425,7 +425,6 @@
                     //发送成功后提示发送成功信息
                     $("#itemAddSuccess-main").text("成功！你已添加商品成功！");
                     $("#itemAddSuccess").removeAttr("hidden");
-                    //满足陈锦龙，GAIO！！
                     $("#itemInfo input,textarea").val("");
                     $("#itemInfo").data('bootstrapValidator').destroy();
                     $('#itemInfo').data('bootstrapValidator', null);

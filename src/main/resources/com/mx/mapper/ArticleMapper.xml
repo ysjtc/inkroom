@@ -142,7 +142,7 @@
 
     <select id="queryArticle" resultMap="ArticlesMap">
         select
-        t1.`title`,t1.page_view,t1.`a_id`,t1.`content`,t1.`publish_time`,t2.`name`,t3.`u_name` as uName
+        t1.`title`,t1.page_view,t1.`a_id`,t1.`content`,t1.`publish_time`,t2.`name`,t3.u_id,t3.`u_name`
         from inkroom.article as t1,inkroom.article_category as t2,inkroom.user as t3
         <where>
             <if test="aId != null">
@@ -329,4 +329,72 @@
         t1.`title`,t1.`content`,t1.`publish_time`,t1.`page_view`,t1.`praise_count`,t1.`u_id`,t2.`u_name`
         from inkroom.article as t1,inkroom.user as t2,
     </select>-->
+
+    <!--superAdmin-->
+    <select id="articleManage" resultType="Map">
+        SELECT
+            t1.*, IFNULL(t2.summary,0) AS summary
+        FROM
+            (
+                SELECT
+                    t1.*, IFNULL(t2.pc,0) AS praise_count
+                FROM
+                    (
+                        SELECT
+                            a.a_id,
+                            a.title,
+                            a.content,
+                            a.u_id,
+                            a.page_view,
+                            a.publish_time,
+														u.u_name
+                        FROM
+                            article a,user u
+												WHERE a.u_id=u.u_id
+                    ) t1,
+                    (
+                        SELECT
+                            t1.a_id,
+                            t2.pc
+                        FROM
+                            article t1
+                        LEFT JOIN (
+                            SELECT
+                                a_id,
+                                count(*) AS pc
+                            FROM
+                                article_praise
+                            GROUP BY
+                                a_id
+                        ) t2 ON t1.a_id = t2.a_id
+                    ) t2
+                WHERE
+                    t1.a_id = t2.a_id
+            ) t1
+        LEFT JOIN (
+            SELECT
+                a_id,
+                SUM(c) AS summary
+            FROM
+                (
+                    SELECT
+                        t1.a_id,
+                        COUNT(*) AS c
+                    FROM
+                        article_comment t1
+                    GROUP BY
+                        a_id
+                    UNION
+                        SELECT
+                            t2.a_id,
+                            count(*) AS c
+                        FROM
+                            ac_reply t2
+                        GROUP BY
+                            a_id
+                ) t3
+            GROUP BY
+                a_id
+        ) t2 ON t1.a_id = t2.a_id
+    </select>
 </mapper>
