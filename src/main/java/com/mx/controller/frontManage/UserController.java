@@ -147,13 +147,15 @@ public class UserController {
     }
 
     /*删除用户的handle*/
-    @RequestMapping("/delateUser")
+    @ResponseBody
+    @RequestMapping("/deleteUser")
     @PreventRepeat
     public String deleteuser(String name){
+        System.out.println("fuck+++++++++++++");
         if(userService.deleteUser(name)){
-            return "true";
+            return "{\"result\":true}";
         }else {
-            return "false";
+            return "{\"result\":false}";
         }
     }
 

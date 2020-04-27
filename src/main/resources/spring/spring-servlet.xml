@@ -55,6 +55,8 @@
             <mvc:mapping path="/ItemsBackManage/**/*"/>
             <mvc:mapping path="/Forward/**/*"/>
             <mvc:mapping path="/ArticleBackManage/**/*"/>
+            <mvc:mapping path="/User/**/getAlluser"/>
+            <mvc:mapping path="/User/**/deleteUser"/>
             <mvc:exclude-mapping path="/SuperAdmin/ToSuperadmin"/>
             <bean class="com.mx.interCeptors.SuperAdminInterCeptor">
             </bean>
@@ -84,6 +86,7 @@
             <mvc:exclude-mapping path="/User/**/register"/>
             <mvc:exclude-mapping path="/User/**/loginMain"/>
             <mvc:exclude-mapping path="/User/**/getAlluser"/>
+            <mvc:exclude-mapping path="/User/**/deleteUser"/>
             <mvc:exclude-mapping path="/FrontForward/loginMain"/>
             <mvc:exclude-mapping path="/FrontForward/error"/>
             <mvc:exclude-mapping path="/FrontForward/store"/>

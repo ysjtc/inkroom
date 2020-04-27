@@ -208,10 +208,10 @@ $(document).ready(function() {
 	});
 	
 	//点击修改时editAddr
-	$(".product").on("click",".delAddr",function(){
+/*	$(".product").on("click",".delAddr",function(){
 		//弹出模态框
 		$("#applyEditModal").modal('toggle');
-	});
+	});*/
 	
 	//点击了模态框的提交按钮时postApplyEdit
 	$("#postApplyEdit").click(function(){
@@ -224,7 +224,7 @@ $(document).ready(function() {
 		postData['addr']=$("#applyEditModal textarea[name='addr']").val();
 		//ajax发送数据
 		$.ajax({
-			url : 'aa/bb',//访问后台的上传方法路径
+			url : 'Address/updateAddress',//访问后台的上传方法路径
 			data : postData,
 			type : 'POST',
 			success : function(data) {
@@ -236,7 +236,10 @@ $(document).ready(function() {
 				}else{
 					alert("意外错误，请重试！");
 				}
-			}
+			},
+            error: function () {
+                alert("网络错误");
+            }
 		});
 	});
 	

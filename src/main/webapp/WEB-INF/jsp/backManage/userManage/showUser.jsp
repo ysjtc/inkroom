@@ -177,7 +177,7 @@
                         width: '70',
                         formatter:function(value, row, index){
 
-                            return "<button onclick='blackRoom(this)' class='btn btn-default btn-xs' uName='"+row.name+"'><span class='glyphicon glyphicon-exclamation-sign'></span>关小黑屋</button>";
+                            return "<button class='btn btn-default btn-xs' uName='"+row.name+"'><span class='glyphicon glyphicon-exclamation-sign'></span>关小黑屋</button>";
                         }
                     }
                     ],
@@ -214,36 +214,33 @@
         
 
         //小黑屋
-        function blackRoom(obj){
-            var uName={};
-            uName['name']=$(obj).attr("uName");
-            //alert(uName.name);
-            // ajax提交删除请求
-            if(confirm("确定要拉黑此用户？")){
-
-                //ajax提交删除请求
-                $.ajax({
-                    url:"<%=request.getContextPath()%>/User/delateUser",
-                    data:uName.name,
-                    type:'post',
-                    success:function(data){
-                        // 要求返回json字符串，键名为result
-                        if(data){
-                            $("#userQueryIssu-main").html("删除成功！");
-                            $("#userQueryIssu").removeAttr("hidden");
-                            $('#userQueryIssu').bootstrapTable('removeByUniqueId', uName);
-                        }
-                    },
-                    error(xhr,status,error){
-                        $("#userQueryIssu-main").html("网络错误！请重试！");
-                        $("#userQueryIssu").removeAttr("hidden");
-                    }
-                });
-                return true;
-            }else{
+        $("#UserInfoTable").on("click","button",function () {
+            uName=$(this).attr("uName");
+            var obj=$(this);
+            if(!confirm("确定要拉黑此用户？")){
                 return false;
             }
-        }
+            $.ajax({
+                url : 'User/deleteUser',//访问后台的上传方法路径
+                data : {"name":uName},
+                type : 'POST',
+                success:function(data){
+                    var data=JSON.parse(data);
+                    // 要求返回json字符串，键名为result
+                    if(data['result']){
+                        $("#userQueryIssu-main").html("删除成功！");
+                        $("#userQueryIssu").removeAttr("hidden");
+                        //$('#userQueryIssu').bootstrapTable('removeByUniqueId', uName);
+                        //this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+                        obj.closest("tr").remove();
+                    }
+                },
+                error(xhr,status,error){
+                    $("#userQueryIssu-main").html("网络错误！请重试！");
+                    $("#userQueryIssu").removeAttr("hidden");
+                }
+            });
+        })
 
     </script>
 

@@ -44,7 +44,7 @@
                                 <span class="personal-vip"><img src="static/images/vip/vip1.png"></span>
                                 <span class="personal-id">(ID:${userData.name})</span>
                             </h4>
-                            <span class="greeting">晚上好</span>
+                            <span class="greeting"></span>
                             <a class="update" href="#" data-toggle="modal" data-target="#updateInfo">修改个人信息</a>
                         </div>
                     </div>

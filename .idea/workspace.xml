@@ -6,31 +6,15 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="109b61a1-da8e-45aa-a791-44faf81164cf" name="Default Changelist" comment="修复了商品图片显示的bug">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mx/utils/Listener/OnlineUserListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/clubManage/articleManage.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/css/backManage/showArticles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/mxsw_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/inkroom_war_exploded.xml" afterDir="false" />
+    <list default="true" id="109b61a1-da8e-45aa-a791-44faf81164cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/backMange/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/ArticleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/backMange/Article_CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/Article_CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/backMange/Article_CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/Article_CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/backMange/BackManageForwardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/backMange/BackManageForwardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/AddressContreller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/AddressContreller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/mapper/ArticleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/mapper/ArticleMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/service/ArticleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/service/ArticleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/service/Impl/AddressServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/service/Impl/AddressServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/service/Impl/ArticleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/service/Impl/ArticleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/utils/Encoding/userCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/utils/Encoding/userCheck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mx/mapper/ArticleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mx/mapper/ArticleMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mx/mapper/Article_CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mx/mapper/Article_CommentMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring/spring-servlet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/navigation/nav.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/navigation/nav.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/storeManage/addItem.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/storeManage/addItem.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/backManage/backNav.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/backManage/backNav.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/frontShow/club/articleDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/frontShow/club/articleDetail.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/userManage/showUser.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/userManage/showUser.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/frontShow/personal/personalMain.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/frontShow/personal/personalMain.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/addAddr.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/addAddr.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/userMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/userMain.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -399,7 +383,8 @@
       <workItem from="1587708146403" duration="6000" />
       <workItem from="1587726913212" duration="7424000" />
       <workItem from="1587862382386" duration="41612000" />
-      <workItem from="1587947026243" duration="16467000" />
+      <workItem from="1587947026243" duration="18922000" />
+      <workItem from="1587983594244" duration="9715000" />
     </task>
     <task id="LOCAL-00001" summary="修改后，用这个">
       <created>1561711718753</created>
@@ -471,7 +456,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584345357991</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="修复了几个已知的bug">
+      <created>1587969446529</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1587969446529</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -547,6 +539,7 @@
     <MESSAGE value="论坛" />
     <MESSAGE value="增加论坛主页的条件查询及结果分页" />
     <MESSAGE value="创建superadmin分支，在新分支下搭建后台管理所需包结构" />
-    <option name="LAST_COMMIT_MESSAGE" value="创建superadmin分支，在新分支下搭建后台管理所需包结构" />
+    <MESSAGE value="修复了几个已知的bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复了几个已知的bug" />
   </component>
 </project>

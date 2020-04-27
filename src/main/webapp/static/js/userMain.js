@@ -1,4 +1,9 @@
 $(document).ready(function() {
+            var d=new Date();
+            var t=d.toLocaleString();
+            //alert(t);
+            $(".greeting").html(t);
+
     // 一个判断是否提交的flag
     var updateUserFlag=true;
     //点击编辑头像时，弹出文件选择

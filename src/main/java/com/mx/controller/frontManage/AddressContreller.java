@@ -84,7 +84,7 @@ public class AddressContreller {
 
     @ResponseBody
     @RequestMapping(value="/updateAddress")
-    public Object updateAddress(
+    public String updateAddress(
             @Valid  Address address,
             BindingResult result,
             HttpSession session
@@ -92,27 +92,22 @@ public class AddressContreller {
         try{
              Map map=new HashMap();
             if (UserValidator.checkError(result)) {
-                map.put("result",false);
-                return map;
+                return "{\"result\":false}";
             }else {
                 int uId = userService.getUserIdByname((String) session.getAttribute("USER_ID"));
                 address.setuId(uId);
                 /*入库前的检验*/
                 if (userCheck.CheckAddaddr(address)) {
-                    map.put("result",false);
-                    return map;
+                    return "{\"result\":false}";
                 } else {
                     /*入库*/
                     addressService.updateaddress(address);
+                    return "{\"result\":true}";
                 }
             }
-            map.put("result",map);
-            return map;
         }catch (Exception e){
             e.printStackTrace();
-            Map map=new HashMap();
-            map.put("result",false);
-            return map;
+            return "{\"result\":false}";
         }
 
     }
