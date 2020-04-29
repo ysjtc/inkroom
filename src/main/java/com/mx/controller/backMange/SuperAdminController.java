@@ -82,8 +82,7 @@ public class SuperAdminController {
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("SUPERADMIN_ID");
-        session.removeAttribute("SUPERADMIN_SESSION");
-        session.invalidate();
+        //session.removeAttribute("SUPERADMIN_SESSION");
         return "redirect:/SuperAdmin/ToLogin";
     }
 

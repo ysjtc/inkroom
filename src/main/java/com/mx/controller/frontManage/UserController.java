@@ -1,15 +1,13 @@
 package com.mx.controller.frontManage;
 
-import com.mx.pojo.Page;
-import com.mx.pojo.User;
-import com.mx.pojo.UserData;
-import com.mx.pojo.User_Pic;
+import com.mx.pojo.*;
 import com.mx.service.UserPicService;
 import com.mx.service.UserService;
 import com.mx.service.VipService;
 import com.mx.utils.Anno.PreventRepeat;
 import com.mx.utils.Encoding.htmlEncoding;
 import com.mx.utils.Encoding.userCheck;
+import com.mx.utils.Listener.MySessionContext;
 import com.mx.utils.RandomUser.RandomUser;
 import com.mx.utils.UpLoad.UserUpload;
 import com.mx.utils.Validators.UserValidator;
@@ -23,8 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -46,9 +43,10 @@ public class UserController {
     @PreventRepeat
     @RequestMapping(value="/login")
     public String login(
-              User user,
-            Model model,
-            HttpSession session){
+                User user,
+                Model model,
+                HttpSession session,
+                HttpServletRequest request){
             /*判断用户名是否合法*/
             if(user.getName()==null||
                     user.getName().equals("")||
@@ -64,13 +62,17 @@ public class UserController {
             User recorduser = userService.login(user);
             /*当用户账号与密码都正确时进入登录成功页面*/
             if (recorduser != null) {
-               User_Pic userPic=userPicService.queryById(recorduser.getuId());
+                User_Pic userPic=userPicService.queryById(recorduser.getuId());
                 UserData userData=userService.queryUserByname(recorduser.getName());
                 userData=htmlEncoding.getUserData(userData);
                 session.setAttribute("userData", userData);
                 session.setAttribute("userPic", userPic);
                 session.setAttribute("USER_ID", recorduser.getName());
                 session.setAttribute("uId",recorduser.getuId());
+                session.setAttribute("uName",recorduser.getuName());
+                session.setAttribute("date",new Date());
+                session.setAttribute("IP",request.getRemoteAddr());
+                session.setAttribute("flag",false);
                 //判断beforePath是否有请求的URL，有的话取出来跳转
                 String beforePath=(String) session.getAttribute("beforePath");
                 if(beforePath!=null) {
@@ -141,8 +143,9 @@ public class UserController {
     @RequestMapping("/loginout")
     @PreventRepeat
     public String loginout(HttpSession session){
+        session.getServletContext().removeAttribute(session.getAttribute("USER_ID").toString());
         session.removeAttribute("USER_ID");
-        session.invalidate();
+        //session.invalidate();
         return "frontShow/navigation/nav";
     }
 
@@ -213,5 +216,42 @@ public class UserController {
         return user;
     }
 
+    @RequestMapping("/onLine")
+    public String onLine(HttpServletRequest request){
+        Map map=new HashMap<>();
+        map= MySessionContext.getSessionMap();
+        List<Listener> list=new ArrayList<>();
+        Listener listener=null;
+        HttpSession session=null;
+        for (Object object: map.values()) {
+            listener=new Listener();
+            session=(HttpSession)object;
+            listener.setUserId(Integer.parseInt(session.getAttribute("USER_ID").toString()));
+            listener.setSessionId(session.getId());
+            listener.setUserName(session.getAttribute("uName").toString());
+            listener.setDate(session.getAttribute("date").toString());
+            listener.setIp(session.getAttribute("IP").toString());
+            System.out.println(listener);
+            list.add(listener);
+        }
+        System.out.println(list);
+        request.setAttribute("info",map.values());
+        request.setAttribute("num",map.size());
+        request.setAttribute("list",list);
+        return "backManage/userManage/showStatus";
+    }
+    @ResponseBody
+    @RequestMapping("/offLine")
+    public String offLine(String sessionId) {
+        if (sessionId != null) {
+            HttpSession session = MySessionContext.getSession(sessionId);
+            System.out.println(session);
+            session.getServletContext().removeAttribute(session.getAttribute("USER_ID").toString());
+            session.removeAttribute("USER_ID");
+            return "{\"result\":true}";
+        } else {
+            return "{\"result\":false}";
+        }
+    }
 }
 
