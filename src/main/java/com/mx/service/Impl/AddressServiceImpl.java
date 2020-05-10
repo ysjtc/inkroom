@@ -66,15 +66,15 @@ public class AddressServiceImpl implements AddressService {
                 return "{\"result\":false,\"isLogin\":true}";
             }
             List<Address> addressList=addressMapper.getAddress(uid);
-            System.out.println(addressList);
+            //System.out.println(addressList);
             str= ConvertJson.ConvertAddress(addressList);
-            System.out.println(str);
             str=str+"true";
         }catch (Exception e){
             e.printStackTrace();
             str=str+"false";
         }
         str=str+"}";
+        //System.out.println(str);
         return str;
     }
 }

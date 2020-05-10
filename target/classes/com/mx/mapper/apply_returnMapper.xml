@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mx.mapper.Apply_returnMapper">
+  <resultMap id="ApplyMaps" type="com.mx.pojo.Apply_return">
+    <id property="applyId" jdbcType="INTEGER" column="apply_id"/>
+    <result property="reason" jdbcType="VARCHAR" column="reason"/>
+    <result property="applyStatus" jdbcType="VARCHAR" column="apply_status"/>
+    <association property="order" javaType="com.mx.pojo.Order">
+      <result column="o_id" jdbcType="INTEGER" property="oId" />
+    </association>
+  </resultMap>
+
+  <insert id="insertApply" parameterType="com.mx.pojo.Apply_return">
+    insert into apply_return
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="order.oId != null">
+        o_id,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="applyStatus != null">
+        apply_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="order.oId != null">
+        #{order.oId},
+      </if>
+      <if test="reason != null">
+        #{reason},
+      </if>
+      <if test="applyStatus != null">
+        #{applyStatus},
+      </if>
+    </trim>
+  </insert>
+  <select id="repeatApply" resultMap="ApplyMaps">
+  select o_id from apply_return where o_id=#{oid}
+</select>
+  <update id="updateApplyStatus" parameterType="com.mx.pojo.Apply_return">
+    update  apply_return
+    <set>
+      <if test="status!= null and status!=''">
+        apply_status=#{status},
+      </if>
+    </set>
+    where apply_id=#{applyId}
+  </update>
+  <select id="queryoIdByapplyId" resultMap="ApplyMaps">
+    select o_id from apply_return where apply_id=#{applyId}
+  </select>
+</mapper>

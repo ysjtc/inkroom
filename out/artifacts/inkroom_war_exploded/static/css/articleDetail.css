@@ -1,0 +1,116 @@
+.whole{
+    padding-left: 0px;
+    width: 90%;
+    height: 100%;
+    float: right;
+}
+.top {
+    height: 120px;
+    width: 100%;
+    padding: 0px;
+}
+.icon {
+    height: 100px;
+    width: 100px;
+}
+.single {
+    height: 140px;
+    width: 960px;
+    border-top-style: inset;
+    border-right-style: inset;
+    border-bottom-style: inset;
+    border-left-style: inset;
+    font-size: 17px;
+}
+.right {
+    height: 140px;
+    width: 130px;
+    padding-right: 10px;
+    padding-left: 10px;
+    float:left;
+    border-top-style: outset;
+    border-right-style: outset;
+    border-bottom-style: outset;
+    border-left-style: outset;
+}
+
+.c_name {
+    width: 100px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 14px;
+    text-align: center;
+}
+.comment {
+    height: 100px;
+    width: 800px;
+    float: left;
+    position: relative;
+}
+.whole .single .comment span {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    padding-left: 30px;
+    height: auto;
+    width: auto;
+}
+.c_time {
+    font-size: 12px;
+    width: 175px;
+    float: left;
+    margin-left: 0px;
+    margin-top: 10px;
+}
+.reply{
+    font-size: 12px;
+    width: 100px;
+    float: left;
+    margin-left: 500px;
+    margin-top: 10px;
+}
+.bg{
+    height: 100%;
+    width: 100%;
+    background-image: url("./../images/clubBackGround.png");
+    background-repeat: repeat;
+}
+.replyer img {
+    height: 70px;
+    width: 70px;
+    float: left;
+}
+.replyer {
+    height: 75px;
+    width: 568.4px;
+    margin-top: 10px;
+    border-top-style: outset;
+    border-right-style: outset;
+    border-bottom-style: outset;
+    border-left-style: outset;
+}
+.r_content {
+    float: left;
+    height: 55px;
+    width: 492px;
+    font-size: 14px;
+}
+.replyer span {
+    font-size: 12px;
+    margin-left: 250px;
+    float: left;
+    width: 50px;
+}
+
+
+#nkt {
+    font-size: 12px;
+    float: left;
+    width: 130px;
+    margin-left: 50px;
+}
+.modal-header image{
+    height: 70px;
+    width: 70px;
+    float: left;
+}

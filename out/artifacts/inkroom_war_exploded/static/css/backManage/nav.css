@@ -1,0 +1,341 @@
+body {
+    min-width: 1200px;
+    background-color: #f6f6f6;
+    margin: 0;
+    padding: 0;
+}
+
+ul,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* 头部导航开始 */
+
+.header {
+    width: 100%;
+    min-width: 1200px;
+    height: 80px;
+    padding: 5px 60px;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: #fff;
+    z-index: 10;
+}
+
+.nav-left {
+    width: 40%;
+    height: 100%;
+    float: left;
+}
+
+.nav-left .logo {
+    margin-left: 40px;
+    height: 100%;
+    display: inline-block;
+}
+
+.nav-left .nav-title {
+    margin-left: 70px;
+    font-family: 'microsoft yahei';
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.nav-left .nav-title h1 {
+    margin: 5px 0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-align: center;
+}
+
+.nav-left .nav-title span {
+    width: 100%;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 400;
+    color: #8a8a8a;
+}
+
+.nav-right {
+    float: right;
+    padding: 25px 30px;
+    font-size: 13px;
+}
+
+.nav-right .admin,
+.nav-right .logout {
+    margin-right: 30px;
+}
+
+.nav-right .logout .glyphicon {
+    padding-left: 5px;
+}
+
+
+/* 头部导航结束 */
+
+
+/* 侧边导航开始 */
+
+.sidebar {
+    position: fixed;
+    width: 18%;
+    height: 100%;
+    padding: 15px;
+    margin-top: 80px;
+    background-color: #fff;
+}
+
+.section ul li a {
+    display: block;
+    margin-bottom: 10px;
+    height: 40px;
+    text-decoration: none;
+    color: #5A5A5A;
+}
+
+.section ul li a:hover {
+    color: white;
+}
+
+.section .section-title {
+    height: 50px;
+    border-radius: 10px;
+    margin-top: 20px;
+    transition: all .2s ease;
+}
+
+.section .section-title:hover,
+.active .section-title {
+    background-color: #5a5a5a;
+    cursor: pointer;
+}
+
+.section .section-title h4 {
+    display: inline-block;
+    line-height: 50px;
+    margin: 0 0 0 20px;
+    vertical-align: middle;
+    color: #5a5a5a;
+    letter-spacing: 3px;
+}
+
+.section .section-title:hover h4,
+.active .section-title h4 {
+    color: #f6f6f6;
+}
+
+.section .section-title .icon {
+    background-size: cover;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-left: 20px;
+    vertical-align: middle;
+}
+
+
+/* 图标部分开始 */
+
+.good-icon {
+    background-image: url(../../images/backManage/good.png);
+}
+
+.section .section-title:hover .good-icon,
+.active .section-title .good-icon {
+    background-image: url(../../images/backManage/good_active.png);
+}
+
+.user-icon {
+    background-image: url(../../images/backManage/user.png);
+}
+
+.section .section-title:hover .user-icon,
+.active .section-title .user-icon {
+    background-image: url(../../images/backManage/user_active.png);
+}
+
+.free-icon {
+    background-image: url(../../images/backManage/free.png);
+}
+
+.section .section-title:hover .free-icon,
+.active .section-title .free-icon {
+    background-image: url(../../images/backManage/free_active.png);
+}
+
+.club-icon {
+    background-image: url(../../images/backManage/club.png);
+}
+
+.section .section-title:hover .club-icon,
+.active .section-title .club-icon {
+    background-image: url(../../images/backManage/club_active.png);
+}
+
+.order-icon {
+    background-image: url(../../images/backManage/order.png);
+}
+
+.section .section-title:hover .order-icon,
+.active .section-title .order-icon {
+    background-image: url(../../images/backManage/order_active.png);
+}
+
+.admin-icon {
+    background-image: url(../../images/backManage/admin.png);
+}
+
+.section .section-title:hover .admin-icon,
+.active .section-title .admin-icon {
+    background-image: url(../../images/backManage/admin_active.png);
+}
+
+
+/* 图标部分结束 */
+
+.section ul {
+    width: 80%;
+    margin: 0 auto;
+    display: none;
+}
+
+.section ul li {
+    width: 100%;
+    height: 40px;
+    padding: 10px 0;
+    margin: 10px 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #5a5a5a;
+    cursor: pointer;
+    transition: all .2s ease;
+    position: relative;
+    z-index: 0;
+}
+
+.section ul li::after {
+    content: '';
+    width: 0;
+    height: 100%;
+    background-color: #5a5a5a;
+    border-radius: 10px;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .2s ease;
+}
+
+.section ul li:hover {
+    color: #f6f6f6;
+}
+
+.section ul li:hover::after {
+    width: 100%;
+}
+
+
+/* 侧边导航结束 */
+
+
+/*右侧主内容开始*/
+
+.right-content {
+    padding: 0;
+    left: 21%;
+    top: 80px;
+    width: 77%;
+    position: absolute;
+}
+
+
+/*存放柱状图，饼图等的div的设定*/
+
+.row-wrap {
+    padding: 0;
+    margin: 0 auto 0 auto;
+    width: 100%;
+}
+
+.chart-container {
+    float: left;
+    width: 47%;
+    margin-top: 15px;
+    margin-left: 2%;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
+}
+
+.chart-container:hover {
+    transition: .4s;
+    transform: scale(1);
+    transform: translateY(-6px);
+}
+
+
+/*显示基本数据的，统计页的顶部的块块（非身份提示）*/
+
+.show-info {
+    float: left;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    margin-left: 2%;
+    padding: 0;
+    width: 22.5%;
+    height: 100px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
+}
+
+.show-info:hover {
+    transition: .4s;
+    transform: scale(1);
+    transform: translateY(-6px);
+}
+
+.sel-glyphicon {
+    background: #CCCCCC;
+    color: #808080;
+    float: left;
+    width: 30%;
+    height: 100%;
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Glyphicons Halflings';
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 3;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.show-info .main-info {
+    padding-top: 5px;
+    text-align: center;
+    float: right;
+    width: 70%;
+    height: 100%;
+    color: #4D4D4D;
+}
+
+
+/*身份提示*/
+
+.which-one {
+    margin-top: 20px;
+}

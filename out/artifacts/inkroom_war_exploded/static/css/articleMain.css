@@ -1,0 +1,37 @@
+.whole{
+    padding-left: 0px;
+    width: 90%;
+    height: 100%;
+    float: right;
+}
+.top {
+    height: 150px;
+    width: 100%;
+    padding: 0px;
+}
+.allArticle{
+    height: 120px;
+    width: 900px;
+    margin-top: 50px;
+    float: left;
+}
+.right {
+    float: right;
+    height: 500px;
+    width: 200px;
+    margin-top: 80px;
+}
+.top-left{
+    width: 300px;
+    float: left;
+}
+.top-right{
+    width: 300px;
+    float: right;
+}
+.bottom{
+    clear: left;
+    position: fixed;
+    bottom: 100px;
+    margin-left: 500px;
+}

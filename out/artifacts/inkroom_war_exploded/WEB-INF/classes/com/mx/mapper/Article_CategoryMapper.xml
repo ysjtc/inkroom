@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mx.mapper.Article_CategoryMapper">
+  <resultMap id="BaseResultMap" type="com.mx.pojo.Article_Category">
+    <result column="ac_id" jdbcType="INTEGER" property="acId" />
+    <result column="name" jdbcType="VARCHAR" property="ACname" />
+
+
+<!--  &lt;!&ndash;封装Article基本信息&ndash;&gt;-->
+<!--  <association property="articleCategory" javaType="com.mx.pojo.Article">-->
+<!--    <id column="a_id" jdbcType="INTEGER"  property="aId" />-->
+<!--    <result column="title" jdbcType="VARCHAR" property="title"/>-->
+<!--    <result column="ac_id" jdbcType="VARCHAR" property="acId"/>-->
+<!--    <result column="publish_time" javaType="VARCHAR" property="publishTime" />-->
+<!--    <result column="content" jdbcType="TEXT" property="content"/>-->
+<!--    <result column="u_id" jdbcType="VARCHAR" property="uId"/>-->
+<!--    <result column="page_view" javaType="INTEGER" property="pageView" />-->
+<!--    <result column="praise_count" javaType="INTEGER" property="praiseCount" />-->
+<!--  </association>-->
+
+
+<!--    &lt;!&ndash;封装User基本信息&ndash;&gt;-->
+<!--    <association property="item_pic"  javaType="com.mx.pojo.User">-->
+<!--      <id column="u_id" property="uId"/>-->
+<!--      <result column="u_name" property="uName"/>-->
+<!--    </association>-->
+
+  </resultMap>
+      <select id="allCtgr" resultType="com.mx.pojo.Article_Category">
+            select name as ACname,ac_id as acId from article_category
+      </select>
+
+<!--  <select id="queryAll" resultMap="ArticlesMap">-->
+<!--        select-->
+<!--        t1.`title`,t1.`publish_time`,t2.`name`,t3.`u_name` as uName,-->
+<!--        from inkroom.article as t1,inkroom.article_category as t2,inkroom.user as t3 order by publish_time desc-->
+<!--    </select>-->
+
+<!--  <select id="queryByAcId" resultMap="ArticlesMap">-->
+<!--    select-->
+<!--    t1.`title`,t1.`publish_time`,t2.`name`,t3.`u_name` as uName,-->
+<!--    from inkroom.article as t1,inkroom.article_category as t2,inkroom.user as t3-->
+<!--    <where>-->
+<!--      <if test="acId != null and acId != ''">-->
+<!--        ac_id = #{acId}-->
+<!--      </if>-->
+<!--    </where>-->
+<!--  </select>-->
+
+<!--  <insert id="insert" parameterType="com.mx.pojo.Article_Category">-->
+<!--    insert into article_category (ac_id, name)-->
+<!--    values (#{acId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})-->
+<!--  </insert>-->
+
+
+<!--  <insert id="insertSelective" parameterType="com.mx.pojo.Article_Category">-->
+<!--    insert into article_category-->
+<!--    <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--      <if test="acId != null">-->
+<!--        ac_id,-->
+<!--      </if>-->
+<!--      <if test="name != null">-->
+<!--        name,-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--    <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--      <if test="acId != null">-->
+<!--        #{acId,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="name != null">-->
+<!--        #{name,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--  </insert>-->
+
+
+
+
+
+
+</mapper>

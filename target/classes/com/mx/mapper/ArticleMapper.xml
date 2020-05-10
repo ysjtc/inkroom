@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mx.mapper.ArticleMapper">
+
+    <!--封装User Article ArticleCategory-->
+    <resultMap id="ArticlesMap" type="com.mx.pojo.Article" >
+        <!--封装Article基本信息-->
+        <id column="a_id" jdbcType="INTEGER"  property="aId" />
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="publish_time" jdbcType="VARCHAR" property="publishTime" />
+        <result column="content" jdbcType="LONGVARCHAR" property="content" />
+<!--        LONGVARCHAR  -->
+        <result column="page_view" jdbcType="INTEGER" property="pageView"/>
+        <result column="u_id" jdbcType="INTEGER" property="uId" />
+        <result column="praise_count" jdbcType="INTEGER" property="praiseCount" />
+
+        <!--封装ArticleCategory基本信息-->
+        <association property="article_category" javaType="com.mx.pojo.Article_Category">
+            <id property="acId" jdbcType="INTEGER" column="ac_id"/>
+            <result column="name" jdbcType="VARCHAR" property="ACname"/>
+        </association>
+
+        <!--封装User基本信息-->
+        <association property="user" javaType="com.mx.pojo.User">
+            <id column="u_id" jdbcType="INTEGER" property="uId"/>
+            <result column="u_name" jdbcType="VARCHAR" property="uName"/>
+            <result column="user_path" jdbcType="VARCHAR" property="password"/>
+        </association>
+    </resultMap>
+
+    <select id="queryByTitle" resultMap="ArticlesMap">
+        select u.u_name,a.*,ac.`name` from user u,article a,article_category ac
+        <where>
+            u.u_id=a.u_id and ac.ac_id=a.ac_id
+            <if test="title != null and title != ''">
+                and title like concat('%',#{title},'%')
+            </if>
+        </where>
+    </select>
+
+    <!--合并文章的多个条件查询，排序和分页-->
+    <select id="queryByConditions" resultMap="ArticlesMap">
+            SELECT
+                t1.*, t2.pc as praise_count
+            FROM
+                (
+                    SELECT
+                        ac.`name`,
+                        a.a_id,
+                        a.title,
+                        a.content,
+                        a.u_id,
+                        u.u_name,
+                        a.page_view,
+                        a.publish_time,
+                        a.ac_id
+                    FROM
+                        user u,
+                        article a,
+                        article_category ac
+                    WHERE
+                        u.u_id = a.u_id
+                    AND ac.ac_id = a.ac_id
+                ) t1,
+                (
+                    SELECT
+                        t1.a_id,
+                        t2.pc
+                    FROM
+                        article t1
+                    LEFT JOIN (
+                        SELECT
+                            a_id,
+                            count(*) AS pc
+                        FROM
+                            article_praise
+                        GROUP BY
+                            a_id
+                    ) t2 ON t1.a_id = t2.a_id
+                ) t2
+            <where>
+                t1.a_id = t2.a_id
+            <choose>
+                <when test="uId != null and uId != ''">
+                    and t1.u_id=#{uId}
+                </when>
+                <otherwise>
+                    <if test="title != null and title != ''">
+                        and t1.title like concat('%',#{title},'%')
+                    </if>
+                    <if test="uName != null and uName != ''">
+                        and t1.u_name like concat('%',#{uName},'%')
+                    </if>
+                    <if test="content != null and content != ''">
+                        and t1.content like  concat('%',#{content},'%')
+                    </if>
+                    <if test="acId != null and acId != ''">
+                        and t1.ac_id = #{acId}
+                    </if>
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="pageView != null">
+                    order by t1.page_view
+                    <if test="sort != null">
+                        desc
+                    </if>
+                </when>
+                <when test="praiseCount != null">
+                    order by t2.pc
+                    <if test="sort != null">
+                        desc
+                    </if>
+                </when>
+                <otherwise>
+                    order by t1.publish_time
+                    <if test="sort != null">
+                        desc
+                    </if>
+                </otherwise>
+            </choose>
+            <if test="pageOff != null and pageSize != null">
+                limit #{pageOff},#{pageSize}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addArticle">
+        insert into article(title, content, page_view, u_id, praise_count,ac_id) values(#{0},#{1},0,#{2},0,#{3})
+    </insert>
+
+    <!--<select id="queryByTitle" resultMap="ArticlesMap">
+        select
+        t1.`title`,t1.`publish_time`,t2.`name`,t3.`u_name` as uName
+        from inkroom.article as t1,inkroom.article_category as t2,inkroom.user as t3
+        <where>
+            <if test="title != null and title != ''">
+                 title like concat('%',#{title},'%')
+            </if>
+        </where>
+    </select>-->
+
+    <select id="queryArticle" resultMap="ArticlesMap">
+        select
+        t1.`title`,t1.page_view,t1.`a_id`,t1.`content`,t1.`publish_time`,t2.`name`,t3.u_id,t3.`u_name`
+        from inkroom.article as t1,inkroom.article_category as t2,inkroom.user as t3
+        <where>
+            <if test="aId != null">
+                a_id = #{aId} and t1.ac_id=t2.ac_id and t3.u_id=t1.u_id
+            </if>
+        </where>
+    </select>
+
+    <select id="queryArticleByuId" resultMap="ArticlesMap">
+        select
+        t1.`title`,t1.`a_id`,t1.praise_count,t1.`publish_time`,t2.`name`,t3.`u_name` as uName
+        from inkroom.article as t1,inkroom.article_category as t2,inkroom.user as t3
+        <where>
+            <if test="uId != null">
+                t1.u_id = #{uId}
+            and t1.`u_id`=t3.`u_id` and t1.ac_id=t2.ac_id
+            </if>
+        </where>
+    </select>
+
+    <delete id="delete">
+        delete from article where a_id = #{aId}
+    </delete>
+    <!-- 我赞过的文章-->
+    <select id="myPraiseArticle" resultMap="ArticlesMap">
+        SELECT
+            t1.*, t2.praise_count,t3.user_path
+        FROM
+            (
+                SELECT
+                    article.ac_id,article.a_id,article.content,article.page_view,
+                    article.publish_time,article.title,article.u_id,
+                    article_category.`name`,`user`.u_name
+                FROM
+                    article,
+                    `user`,
+                    article_category
+                WHERE
+                    a_id IN (
+                        SELECT
+                            article_praise.a_id
+                        FROM
+                            article_praise
+                        WHERE
+                            article_praise.praise_u_id = #{aId}
+                    )
+                AND `user`.u_id = article.u_id
+                AND article_category.ac_id = article.ac_id
+            ) t1,
+            (
+                SELECT
+                    t1.a_id,
+                    t2.praise_count
+                FROM
+                    article t1
+                LEFT JOIN (
+                    SELECT
+                        a_id,
+                        count(*) AS praise_count
+                    FROM
+                        article_praise
+                    GROUP BY
+                        a_id
+                ) t2 ON t1.a_id = t2.a_id
+            ) t2,user_pic t3
+        WHERE
+            t1.a_id = t2.a_id and t1.u_id=t3.u_id
+    </select>
+    <!-- 按类别搜索-->
+    <select id="queryByctgr" resultMap="ArticlesMap">
+        select u.u_name,a.a_id,a.page_view,a.praise_count,a.title,a.publish_time,ac.`name` from user u,article a,article_category ac
+        <where>
+            u.u_id=a.u_id and ac.ac_id=a.ac_id
+            <if test="acId != null and acId != ''">
+                and ac.ac_id = #{acId}
+            </if>
+        </where>
+    </select>
+    <select id="articlePraise" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT count(*) from article_praise where a_id=#{aId}
+    </select>
+    <!--我(u_id)获得真实的赞-->
+    <select id="myPraiseCount" parameterType="Integer" resultType="Integer">
+            SELECT count(*) from article_praise where a_id in (SELECT a_id FROM article where u_id=#{uId})
+    </select>
+    <!--判定该文章是否已由用户点过赞 为空可点-->
+    <select id="ifPraised" resultType="Integer">
+            SELECT a_id from article_praise where a_id=#{aId} and praise_u_id=#{uId}
+    </select>
+
+    <update id="PVRaise" parameterType="Integer">
+            update article set page_view=page_view+1 where a_id=#{aId}
+    </update>
+    <insert id="addAP">
+            insert into article_praise values (#{aId},#{uId})
+    </insert>
+
+    <delete id="delArticle" parameterType="Integer">
+        delete from article where a_id=#{0}
+    </delete>
+
+    <select id="myArticles" resultType="Map" parameterType="Integer">
+        SELECT
+            t1.*, IFNULL(t2.summary,0) AS summary
+        FROM
+            (
+                SELECT
+                    t1.*, IFNULL(t2.pc,0) AS praise_count
+                FROM
+                    (
+                        SELECT
+                            a.a_id,
+                            a.title,
+                            a.content,
+                            a.u_id,
+                            a.page_view,
+                            a.publish_time
+                        FROM
+                            article a
+                    ) t1,
+                    (
+                        SELECT
+                            t1.a_id,
+                            t2.pc
+                        FROM
+                            article t1
+                        LEFT JOIN (
+                            SELECT
+                                a_id,
+                                count(*) AS pc
+                            FROM
+                                article_praise
+                            GROUP BY
+                                a_id
+                        ) t2 ON t1.a_id = t2.a_id
+                    ) t2
+                WHERE
+                    t1.a_id = t2.a_id
+                AND t1.u_id = #{0}
+            ) t1
+        LEFT JOIN (
+            SELECT
+                a_id,
+                SUM(c) AS summary
+            FROM
+                (
+                    SELECT
+                        t1.a_id,
+                        COUNT(*) AS c
+                    FROM
+                        article_comment t1
+                    GROUP BY
+                        a_id
+                    UNION
+                        SELECT
+                            t2.a_id,
+                            count(*) AS c
+                        FROM
+                            ac_reply t2
+                        GROUP BY
+                            a_id
+                ) t3
+            GROUP BY
+                a_id
+        ) t2 ON t1.a_id = t2.a_id
+    </select>
+
+    <select id="articleCount" parameterType="Integer" resultType="Integer">
+        select count(*) from article where u_id=#{0}
+    </select>
+    <select id="iPraise" parameterType="Integer" resultType="Integer">
+        select count(*) from article_praise where u_id=#{0}
+    </select>
+    <select id="statistics" parameterType="Integer" resultType="Map">
+        SELECT t1.a_c,t2.ilike,t3.c_c,t4.ced_c,t5.red_c FROM
+        (SELECT COUNT(*) as a_c from article WHERE u_id=#{0})t1,
+        (SELECT COUNT(*) as ilike from article_praise WHERE praise_u_id=#{0}) t2,
+        (SELECT COUNT(*) as c_c from article_comment WHERE u_id=#{0}) t3,
+        (SELECT COUNT(*) as ced_c from article_comment WHERE a_id in (SELECT a_id from article WHERE u_id=#{0})) t4,
+        (SELECT COUNT(*) as red_c from ac_reply WHERE to_uid=#{0} or aco_id in (SELECT aco_id from article_comment WHERE u_id=#{0})) t5
+    </select>
+<!--    <select id="queryArticle" resultType="com.mx.pojo.Article">
+        select
+        t1.`title`,t1.`content`,t1.`publish_time`,t1.`page_view`,t1.`praise_count`,t1.`u_id`,t2.`u_name`
+        from inkroom.article as t1,inkroom.user as t2,
+    </select>-->
+
+    <!--superAdmin-->
+    <select id="articleManage" resultType="Map">
+        SELECT
+            t1.*, IFNULL(t2.summary,0) AS summary
+        FROM
+            (
+                SELECT
+                    t1.*, IFNULL(t2.pc,0) AS praise_count
+                FROM
+                    (
+                        SELECT
+                            a.a_id,
+                            a.title,
+                            a.content,
+                            a.u_id,
+                            a.page_view,
+                            a.publish_time,
+														u.u_name
+                        FROM
+                            article a,user u
+												WHERE a.u_id=u.u_id
+                    ) t1,
+                    (
+                        SELECT
+                            t1.a_id,
+                            t2.pc
+                        FROM
+                            article t1
+                        LEFT JOIN (
+                            SELECT
+                                a_id,
+                                count(*) AS pc
+                            FROM
+                                article_praise
+                            GROUP BY
+                                a_id
+                        ) t2 ON t1.a_id = t2.a_id
+                    ) t2
+                WHERE
+                    t1.a_id = t2.a_id
+            ) t1
+        LEFT JOIN (
+            SELECT
+                a_id,
+                SUM(c) AS summary
+            FROM
+                (
+                    SELECT
+                        t1.a_id,
+                        COUNT(*) AS c
+                    FROM
+                        article_comment t1
+                    GROUP BY
+                        a_id
+                    UNION
+                        SELECT
+                            t2.a_id,
+                            count(*) AS c
+                        FROM
+                            ac_reply t2
+                        GROUP BY
+                            a_id
+                ) t3
+            GROUP BY
+                a_id
+        ) t2 ON t1.a_id = t2.a_id
+    </select>
+</mapper>

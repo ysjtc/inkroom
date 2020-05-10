@@ -6,17 +6,16 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="109b61a1-da8e-45aa-a791-44faf81164cf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mx/pojo/Listener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mx/utils/Listener/MySessionContext.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mx/utils/Listener/MySessionListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/userManage/showStatus.jsp" afterDir="false" />
+    <list default="true" id="109b61a1-da8e-45aa-a791-44faf81164cf" name="Default Changelist" comment="用户监控完成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/backMange/SuperAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/backMange/SuperAdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/utils/Listener/OnlineUserListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring/spring-servlet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/OrderFrontManageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/OrderFrontManageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/service/Impl/AddressServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/service/Impl/AddressServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/utils/ConvertJson/ConvertJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/utils/ConvertJson/ConvertJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mx/mapper/AddressMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mx/mapper/AddressMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jdbc.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/userManage/showStatus.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/userManage/showStatus.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/backManage/backNav.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/backManage/backNav.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/cart.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -145,7 +144,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.51449275" />
-    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -388,7 +387,16 @@
       <workItem from="1587947026243" duration="18922000" />
       <workItem from="1587983594244" duration="10663000" />
       <workItem from="1588036301825" duration="44215000" />
-      <workItem from="1588121916082" duration="289000" />
+      <workItem from="1588121916082" duration="5247000" />
+      <workItem from="1588135448976" duration="894000" />
+      <workItem from="1588228754582" duration="15588000" />
+      <workItem from="1588253045987" duration="318000" />
+      <workItem from="1588256326224" duration="7000" />
+      <workItem from="1588302727425" duration="3340000" />
+      <workItem from="1588311984041" duration="31000" />
+      <workItem from="1588313081191" duration="648000" />
+      <workItem from="1589093910622" duration="2708000" />
+      <workItem from="1589098458491" duration="897000" />
     </task>
     <task id="LOCAL-00001" summary="修改后，用这个">
       <created>1561711718753</created>
@@ -474,7 +482,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587993699225</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="用户监控完成">
+      <created>1588122295286</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1588122295286</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -552,6 +567,7 @@
     <MESSAGE value="创建superadmin分支，在新分支下搭建后台管理所需包结构" />
     <MESSAGE value="修复了几个已知的bug" />
     <MESSAGE value="修复了后台删除用户时请求被用户拦截器拦截的bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复了后台删除用户时请求被用户拦截器拦截的bug" />
+    <MESSAGE value="用户监控完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="用户监控完成" />
   </component>
 </project>

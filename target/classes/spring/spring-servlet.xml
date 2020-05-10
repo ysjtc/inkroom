@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tool"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd">
+
+
+    <!--启用注解  排除service注解-->
+    <context:component-scan base-package="com.mx">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+    <context:component-scan base-package="com.mx.controller"/>
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+    <!--加上MVC驱动-->
+    <mvc:annotation-driven>
+       <!--配置消息转换器已支持json的使用-->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+              <constructor-arg value="utf-8"/>
+                <property name="writeAcceptCharset" value="false"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <!--文件上传解析器
+        id只能为multipartResolver
+    -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--最大上传文件  byte-->
+        <property name="maxUploadSize" value="54000000"/>
+        <!--上传编码-->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!--单个文件上传的最大大小-->
+        <property name="maxUploadSizePerFile" value="10240000"/>
+    </bean>
+    <!--静态资源处理-->
+    <mvc:default-servlet-handler/>
+    <!--使用AOP对事务管理的范围进行织入明确几个点1.对哪些地方需要进行事务管理execution书写,明确边界,2使用什么策略去管理
+  策略我们使用了tx:advice全部书写与其中,在我们的aop的advice当中只需要去引用这个事务管理器者的建议即可-->
+    <!--拦截器的配置-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--/*只能拦截/name一层，而/**可以拦截多层-->
+            <!--/**/*可以拦截任意包任意层-->
+            <mvc:mapping path="/SuperAdmin/**/*"/>
+            <mvc:mapping path="/ItemsBackManage/**/*"/>
+            <mvc:mapping path="/Forward/**/*"/>
+            <mvc:mapping path="/ArticleBackManage/**/*"/>
+            <mvc:mapping path="/User/**/getAlluser"/>
+            <mvc:mapping path="/User/**/deleteUser"/>
+            <mvc:mapping path="/User/**/onLine"/>
+            <mvc:mapping path="/User/**/onLine"/>
+            <mvc:exclude-mapping path="/SuperAdmin/ToSuperadmin"/>
+            <bean class="com.mx.interCeptors.SuperAdminInterCeptor">
+            </bean>
+        </mvc:interceptor>
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/UserLogin"/>
+            <mvc:exclude-mapping path="/SuperAdmin/add/**/*"/>-->
+            <!--<mvc:exclude-mapping path="/User/login"/>-->
+            <!--<bean class="com.mx.interCeptors.SessionInterceptor"></bean>-->
+         <!--</mvc:interceptor>-->
+
+        <!--防止重复提交的拦截器-->
+       <!-- <mvc:interceptor>
+            &lt;!&ndash; 拦截url &ndash;&gt;
+            <mvc:mapping path="/User/**/*"/>
+            &lt;!&ndash; 自定义拦截器类 &ndash;&gt;
+            <bean class="com.mx.interCeptors.RepeatInterCeptor"/>
+        </mvc:interceptor>-->
+
+        <!-- 登录验证拦截 -->
+        <mvc:interceptor>
+            <!--拦截url-->
+            <mvc:mapping path="/Article/**/*"/>
+            <mvc:mapping path="/User/**/*"/>
+            <mvc:mapping path="/FrontForward/**/*"/>
+            <mvc:exclude-mapping path="/User/**/login"/>
+            <mvc:exclude-mapping path="/User/**/register"/>
+            <mvc:exclude-mapping path="/User/**/loginMain"/>
+            <mvc:exclude-mapping path="/User/**/getAlluser"/>
+            <mvc:exclude-mapping path="/User/**/deleteUser"/>
+            <mvc:exclude-mapping path="/User/**/onLine"/>
+            <mvc:exclude-mapping path="/User/**/offLine"/>
+            <mvc:exclude-mapping path="/FrontForward/loginMain"/>
+            <mvc:exclude-mapping path="/FrontForward/error"/>
+            <mvc:exclude-mapping path="/FrontForward/store"/>
+            <!-- 自定义拦截器类 -->
+            <bean class="com.mx.interCeptors.LoginInterCeptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+</beans>
+

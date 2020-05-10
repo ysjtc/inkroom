@@ -114,13 +114,16 @@ public class ConvertJson {
         //定义一个StringBuilder
         StringBuilder jsonStrAll = new StringBuilder("{");
         String str=null;
-        for (int i=0;i<addressList.size();i++){
+            for (Address address:addressList) {
+                jsonStrAll.append("\""+address.getAddId()+"\":[\"姓名："+address.getName()+"\",\"地址："+address.getAddr()+"\",\"电话:"+address.getTel().substring(0,3)+"***"+address.getTel().substring(address.getTel().length()-6,address.getTel().length())+"\"],");
+            }
+        /*for (int i=0;i<addressList.size();i++){
             //把你要拼接的字段放进去
             jsonStrAll.append("\""+addressList.get(i).getAddId()+"\":[\""+addressList.get(i).getName()+"\",\""+addressList.get(i).getAddr().substring(0,3)+"..."+addressList.get(i).getAddr().substring(addressList.get(i).getAddr().length()-6,addressList.get(i).getAddr().length())+"\"],");
-        }
+        }*/
 
         str = jsonStrAll+"\"result\":";
-//        System.out.println(str);
+        //System.out.println(str);
         return str;
     }
 

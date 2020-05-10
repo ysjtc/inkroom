@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mx.mapper.CategoryMapper">
+  <resultMap id="BaseResultMap" type="com.mx.pojo.Category">
+    <result column="c_id" jdbcType="INTEGER" property="cId" />
+    <result column="catename" jdbcType="VARCHAR" property="CateName" />
+  </resultMap>
+  <select id="queryCid" resultType="Integer">
+    select c_id from category
+  </select>
+  <select id="queryAllCategory" resultType="com.mx.pojo.Category">
+    select * from category
+  </select>
+  <select id="queryItemsItemCateName" resultType="com.mx.pojo.Category">
+    select * from category
+  </select>
+  <insert id="addCategory" parameterType="com.mx.pojo.Category">
+    insert into category(catename) values (#{cateName})
+  </insert>
+</mapper>

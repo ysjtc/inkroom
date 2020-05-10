@@ -123,6 +123,7 @@ public class OrderFrontManageController {
                         order_detail.setTotalPrice(totalPrice);
                         //数据插入订单详情表插入i次
                         createOrderDet = orderService.createOrderDet(order_detail);
+                        System.out.println("huaq=====================");
                     } catch (Exception e) {
                         e.printStackTrace();
                         return falsejson;
