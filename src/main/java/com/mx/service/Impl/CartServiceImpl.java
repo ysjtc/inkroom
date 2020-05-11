@@ -65,8 +65,8 @@ public class CartServiceImpl implements CartService {
     @Override
     public boolean deleteCartItem(Integer cart_id) {
         try{
-            boolean row= cartMapper.delCartItem(cart_id);
-            if (!row){
+            int row= cartMapper.delCartItem(cart_id);
+            if (row==0){
                 return false;
             }else return true;
         }catch (Exception e){

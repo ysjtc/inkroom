@@ -64,8 +64,8 @@
     delete from cart
     <where>
       <trim>
-        <if test="itemId!=null">
-          cart_id=#{cartId}
+        <if test="cartId!=null">
+          cart_Id=#{cartId}
         </if>
       </trim>
     </where>

@@ -25,7 +25,7 @@ public interface CartMapper {
     boolean editCount(@Param("cartId") Integer cartId,@Param("count") Integer count);
 
     //单个/批量删除购物车的商品
-    boolean delCartItem(@Param("cartId")Integer cartId);
+    int delCartItem(@Param("cartId")Integer cartId);
 
     //由于数据库中uid和itemid没有作为联合主键，所以这里进行判断是否存在同一个用户对同一个商品重复下单
     Cart repeatToCart(@Param("uid") Integer uid,@Param("itemId") Integer itemId);

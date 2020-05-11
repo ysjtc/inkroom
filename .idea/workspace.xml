@@ -8,13 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="109b61a1-da8e-45aa-a791-44faf81164cf" name="Default Changelist" comment="用户监控完成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/OrderFrontManageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/controller/frontManage/OrderFrontManageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/service/Impl/AddressServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/service/Impl/AddressServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/utils/ConvertJson/ConvertJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/utils/ConvertJson/ConvertJson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mx/mapper/AddressMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mx/mapper/AddressMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jdbc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/userManage/showStatus.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/backManage/userManage/showStatus.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/backManage/backNav.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/backManage/backNav.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/mapper/CartMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/mapper/CartMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mx/service/Impl/CartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mx/service/Impl/CartServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mx/mapper/CartMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mx/mapper/CartMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/cart.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -396,7 +392,8 @@
       <workItem from="1588311984041" duration="31000" />
       <workItem from="1588313081191" duration="648000" />
       <workItem from="1589093910622" duration="2708000" />
-      <workItem from="1589098458491" duration="897000" />
+      <workItem from="1589098458491" duration="1414000" />
+      <workItem from="1589159367368" duration="8107000" />
     </task>
     <task id="LOCAL-00001" summary="修改后，用这个">
       <created>1561711718753</created>

@@ -67,31 +67,32 @@ $(function() {
     });
     
     $(".product").on("click",".product-del",function(){
-        if (confirm("您确定要删除当前商品？")) {
-            $(this).closest(".product-box").remove();
-            //ajax发送删除购物车
-            var data={};
-            var cartIdArray=[];
-            cartIdArray.push($(this).closest(".product-box").find("input.product-num").attr("cartId"));
-            data['cartId']=cartIdArray;
-            $.ajax({
-                url : 'CartFrontManage/deleteCartItem',
-                data:data,
-                type : 'POST',
-                success : function(data) {
-                    data=JSON.parse(data);
-                    if(data['result']){
-                        //成功后,啥也不干
-                    }else{
-                        if(data['isLogin']==false){
-                            window.location.href="FrontForward/loginMain";
-                            return;
-                        }
-                        alert("下单失败！请重试！");
-                    }
-                }
-            });
+        if (!confirm("您确定要删除当前商品？")) {
+            return false;
         }
+        //ajax发送删除购物车
+        var obj=$(this);
+        var cartId=[];
+        cartId.push($(this).closest(".product-box").find("input.product-num").attr("cartId"));
+        //data['cartId']=cartIdArray;
+        alert(cartId[0]);
+        $.ajax({
+            url : 'CartFrontManage/deleteCartItem?cartId='+cartId,
+            type : 'POST',
+            success : function(data) {
+                data=JSON.parse(data);
+                if(data['result']){
+                    //alert("succeed");
+                    obj.closest(".product-box").remove();
+                }else{
+                    if(data['isLogin']==false){
+                        window.location.href="FrontForward/loginMain";
+                        return;
+                    }
+                    //alert("下单失败！请重试！");
+                }
+            }
+        });
         koncat();
         TotalPrice()
     });
